@@ -1,40 +1,34 @@
 import firebase from 'firebase/app'
-import 'firebase/auth'
 import 'firebase/database'
 
-import { configMy } from '../config'
+const config = {
+  databaseURL: 'https://hacker-news.firebaseio.com'
+};
 
-firebase.initializeApp(configMy);
-
-// auth
-
-export const auth = firebase.auth();
-
-export const createUser = (email, password) => (
-  auth.createUserWithEmailAndPassword(email, password)
-);
-
-export const signIn = (email, password) => (
-  auth.signInWithEmailAndPassword(email, password)
-);
-
-export const signOut = () => (
-  auth.signOut()
-);
-
-// fav list
+firebase.initializeApp(config);
 
 const database = firebase.database();
 
-const usersRef = database.ref('users');
+const version = 'v0';
 
-const favList = user => usersRef.child(user + '/fav');
+const databaseRef = database.ref(version);
 
-export const setFav = (user, item) => (
-  favList(user).child(item.id).set(item)
+const itemRef = id => databaseRef.child(`item/${id}`);
+
+const storiesRef = type => databaseRef.child(`${type}stories`);
+
+const getItem = id => (
+  itemRef(id).once('value')
+    .then(snapshot => snapshot.val())
 );
 
-export const getFav = user => (
-  favList(user).once('value')
-    .then(snapshot => snapshot.val())
+const getItems = (ids, limit = 5) => (
+  Promise.all(
+    ids.splice(0, limit).map(id => getItem(id))
+  ).then(items => items)
+);
+
+export const getStories = (type, limit) => (
+  storiesRef(type).once('value')
+    .then(snapshot => getItems(snapshot.val(), limit))
 );

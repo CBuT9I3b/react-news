@@ -1,4 +1,4 @@
-import { getStories, getFav } from '../services'
+import { getStories } from '../services'
 
 // actions
 
@@ -35,18 +35,12 @@ export const selectTypeContent = typeContent => ({
 
 // thunk functions
 
-function asyncGetContent(typeContent, user) {
+function asyncGetContent(typeContent) {
   return function(dispatch) {
     dispatch(getContentRequest(typeContent));
-    if (typeContent === 'fav') {
-      getFav(user)
-        .then(items => dispatch(getContentSuccess(typeContent, items)))
-        .catch(error => dispatch(getContentError(typeContent, error)))
-    } else {
-      getStories(typeContent)
-        .then(items => dispatch(getContentSuccess(typeContent, items)))
-        .catch(error => dispatch(getContentError(typeContent, error)))
-    }
+    getStories(typeContent)
+      .then(items => dispatch(getContentSuccess(typeContent, items)))
+      .catch(error => dispatch(getContentError(typeContent, error)))
   }
 }
 
@@ -59,10 +53,10 @@ function shouldGetContent(state, typeContent) {
   }
 }
 
-export function getContentIfNeeded(typeContent, user) {
+export function getContentIfNeeded(typeContent) {
   return function(dispatch, getState) {
     if (shouldGetContent(getState(), typeContent)) {
-      return dispatch(asyncGetContent(typeContent, user))
+      return dispatch(asyncGetContent(typeContent))
     }
   }
 }

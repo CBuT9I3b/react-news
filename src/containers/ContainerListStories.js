@@ -7,22 +7,22 @@ import { ListStories } from '../components'
 
 class ContainerListStories extends Component {
   componentDidMount() {
-    const { dispatch, type, selectedType, user } = this.props;
+    const { dispatch, type, selectedType } = this.props;
     if (selectedType !== type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType) {
-      dispatch(getContentIfNeeded(selectedType, user))
+      dispatch(getContentIfNeeded(selectedType))
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatch, type, selectedType, user } = this.props;
+    const { dispatch, type, selectedType } = this.props;
     if (type !== prevProps.type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType !== prevProps.selectedType) {
-      dispatch(getContentIfNeeded(selectedType, user))
+      dispatch(getContentIfNeeded(selectedType))
     }
   }
 
@@ -40,9 +40,9 @@ ContainerListStories.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { selectedType, content, user } = state;
+  const { selectedType, content } = state;
   const { isLoading, isError, items } = content[selectedType] || { isLoading: false, isError: false, items: [] };
-  return { isLoading, isError, items, selectedType, user }
+  return { isLoading, isError, items, selectedType }
 };
 
 export default connect(mapStateToProps)(ContainerListStories)

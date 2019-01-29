@@ -4,6 +4,5 @@ export const TYPE_STORIES = {
   BEST: 'best',
   ASK: 'ask',
   SHOW: 'show',
-  JOB: 'job',
-  FAV: 'fav'
+  JOB: 'job'
 };

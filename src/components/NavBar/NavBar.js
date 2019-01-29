@@ -14,11 +14,11 @@ const NavBar = () => (
     <div className='navbar-fixed'>
       <nav>
         <div className='nav-wrapper'>
-          <a className='sidenav-trigger' data-target='mobile-nav'>
+          <a href='/' className='sidenav-trigger' data-target='mobile-nav'>
             <i className='material-icons'>menu</i>
           </a>
           <ul className='left hide-on-med-and-down'>
-            <li><a className='dropdown-trigger' data-target='dropdown-news'>
+            <li><a href='/' className='dropdown-trigger' data-target='dropdown-news'>
               Hacker News<i className='material-icons right'>arrow_drop_down</i>
             </a></li>
             <li><NavLink to={`/${TYPE_STORIES.ASK}`}>Ask</NavLink></li>
