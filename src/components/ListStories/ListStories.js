@@ -1,19 +1,20 @@
 import React from 'react'
 
-import { Article } from '..'
+import { Card } from '..'
 
 const ListStories = props => {
   const { isLoading, isError, items } = props.data;
   if (isLoading) {
-    return <Article data={{text: 'Loading...'}} />
+    return <Card data={{text: 'Loading...'}} />
   }
   if (isError) {
-    return <Article data={{title: 'Error', text: isError}} />
+    return <Card data={{title: 'Error', text: isError}} />
   }
   if (items.length !== 0) {
-    return items.map(item => item ? <Article data={item} key={item.id} /> : null)
+    return items.map(item => item ? <Card data={item} key={item.id} /> : null)
+  } else {
+    return <Card data={({title: 'Error', text: 'No Stories'})} />
   }
-  return null
 };
 
 export default ListStories

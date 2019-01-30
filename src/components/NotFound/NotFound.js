@@ -1,8 +1,8 @@
 import React from 'react'
-import { Article } from '..'
+import { Card } from '..'
 
 const NotFound = () => (
-  <Article data={{title: 'Error', text: 'This Page Not Found'}} />
+  <Card data={{title: 'Error', text: 'Not Found'}} />
 );
 
 export default NotFound

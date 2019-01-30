@@ -35,10 +35,10 @@ export const selectTypeContent = typeContent => ({
 
 // thunk functions
 
-function asyncGetContent(typeContent) {
+function asyncGetContent(typeContent, limit = 5) {
   return function(dispatch) {
     dispatch(getContentRequest(typeContent));
-    getStories(typeContent)
+    getStories(typeContent, limit)
       .then(items => dispatch(getContentSuccess(typeContent, items)))
       .catch(error => dispatch(getContentError(typeContent, error)))
   }
@@ -53,10 +53,10 @@ function shouldGetContent(state, typeContent) {
   }
 }
 
-export function getContentIfNeeded(typeContent) {
+export function getContentIfNeeded(typeContent, limit) {
   return function(dispatch, getState) {
     if (shouldGetContent(getState(), typeContent)) {
-      return dispatch(asyncGetContent(typeContent))
+      return dispatch(asyncGetContent(typeContent, limit))
     }
   }
 }

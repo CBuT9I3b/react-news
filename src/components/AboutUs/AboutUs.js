@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Article } from '..'
+import { Card } from '..'
 
 const AboutUs = () => (
-  <Article data={{title: 'About Us', text: 'About Us'}} />
+  <Card data={{title: 'About Us', text: 'About Us'}} />
 );
 
 export default AboutUs

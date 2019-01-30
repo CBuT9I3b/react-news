@@ -22,7 +22,7 @@ const getItem = id => (
     .then(snapshot => snapshot.val())
 );
 
-const getItems = (ids, limit = 5) => (
+const getItems = (ids, limit) => (
   Promise.all(
     ids.splice(0, limit).map(id => getItem(id))
   ).then(items => items)
