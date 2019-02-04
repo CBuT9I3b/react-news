@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 
+import { withFirebase } from '../services'
 import { selectTypeContent, getContentIfNeeded } from '../actions'
 import { ListStories } from '../components'
 
 class ContainerListStories extends Component {
   componentDidMount() {
-    const { dispatch, type, selectedType } = this.props;
+    const { firebase, dispatch, type, selectedType } = this.props;
     if (selectedType !== type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType) {
-      dispatch(getContentIfNeeded(selectedType))
+      dispatch(getContentIfNeeded(selectedType, 0, firebase))
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatch, type, selectedType } = this.props;
+    const { firebase, dispatch, type, selectedType } = this.props;
     if (type !== prevProps.type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType !== prevProps.selectedType) {
-      dispatch(getContentIfNeeded(selectedType))
+      dispatch(getContentIfNeeded(selectedType, 0, firebase))
     }
   }
 
@@ -45,4 +47,7 @@ const mapStateToProps = state => {
   return { isLoading, isError, items, selectedType }
 };
 
-export default connect(mapStateToProps)(ContainerListStories)
+export default compose(
+  withFirebase,
+  connect(mapStateToProps)
+)(ContainerListStories)

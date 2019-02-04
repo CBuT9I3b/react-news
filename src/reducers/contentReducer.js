@@ -36,8 +36,7 @@ function getContent(state = {
         ...state,
         isLoading: false,
         isError: false,
-        items: action.items,
-        lastUpdated: action.receivedAt
+        items: action.items
       };
     default:
       return state

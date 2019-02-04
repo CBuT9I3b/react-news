@@ -1,5 +1,3 @@
-import { getStories } from '../services'
-
 // actions
 
 export const GET_CONTENT_REQUEST = 'GET_CONTENT_REQUEST';
@@ -17,15 +15,13 @@ const getContentRequest = typeContent => ({
 const getContentSuccess = (typeContent, items) => ({
   type: GET_CONTENT_SUCCESS,
   typeContent,
-  items,
-  receivedAt: Date.now()
+  items
 });
 
 const getContentError = (typeContent, error) => ({
   type: GET_CONTENT_ERROR,
   typeContent,
-  error,
-  receivedAt: Date.now()
+  error
 });
 
 export const selectTypeContent = typeContent => ({
@@ -35,28 +31,24 @@ export const selectTypeContent = typeContent => ({
 
 // thunk functions
 
-function asyncGetContent(typeContent, limit = 5) {
-  return function(dispatch) {
-    dispatch(getContentRequest(typeContent));
-    getStories(typeContent, limit)
-      .then(items => dispatch(getContentSuccess(typeContent, items)))
-      .catch(error => dispatch(getContentError(typeContent, error)))
-  }
-}
+const asyncGetContent = (typeContent, page, firebase) => dispatch => {
+  dispatch(getContentRequest(typeContent));
+  firebase.getPage(typeContent, page)
+    .then(items => dispatch(getContentSuccess(typeContent, items)))
+    .catch(error => dispatch(getContentError(typeContent, error)))
+};
 
-function shouldGetContent(state, typeContent) {
-  let content = state.content[typeContent];
+const shouldGetContent = (typeContent, state) => {
+  const content = state.content[typeContent];
   if (!content) {
     return true
   } else if (content.isLoading) {
     return false
   }
-}
+};
 
-export function getContentIfNeeded(typeContent, limit) {
-  return function(dispatch, getState) {
-    if (shouldGetContent(getState(), typeContent)) {
-      return dispatch(asyncGetContent(typeContent, limit))
-    }
+export const getContentIfNeeded = (typeContent, page, firebase) => (dispatch, getState) => {
+  if (shouldGetContent(typeContent, getState())) {
+    return dispatch(asyncGetContent(typeContent, page, firebase))
   }
-}
+};
