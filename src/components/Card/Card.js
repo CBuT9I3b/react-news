@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Card = props => {
-  const { by, time, title, type, url, text } = props.data;
+const Card = ({ data }) => {
+  const { by, time, title, type, url, text } = data;
   return (
     <div className='col l12 m12 s12'>
       <div className='card hoverable blue-grey lighten-5'>

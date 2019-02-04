@@ -4,34 +4,39 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { withFirebase } from '../services'
-import { selectTypeContent, getContentIfNeeded } from '../actions'
+import { selectTypeContent, getContentIfNeeded, asyncGetContent } from '../actions'
 import { ListStories } from '../components'
 
 class ContainerListStories extends Component {
+  addNextPage = () => {
+    const { firebase, dispatch, selectedType, page } = this.props;
+    dispatch(asyncGetContent(selectedType, page + 1, firebase))
+  };
+
   componentDidMount() {
-    const { firebase, dispatch, type, selectedType } = this.props;
+    const { firebase, dispatch, type, selectedType, page } = this.props;
     if (selectedType !== type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType) {
-      dispatch(getContentIfNeeded(selectedType, 0, firebase))
+      dispatch(getContentIfNeeded(selectedType, page, firebase))
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { firebase, dispatch, type, selectedType } = this.props;
+    const { firebase, dispatch, type, selectedType, page } = this.props;
     if (type !== prevProps.type) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType !== prevProps.selectedType) {
-      dispatch(getContentIfNeeded(selectedType, 0, firebase))
+      dispatch(getContentIfNeeded(selectedType, page, firebase))
     }
   }
 
   render() {
     const { isLoading, isError, items } = this.props;
     return (
-      <ListStories data={{ isLoading, isError, items }} />
+      <ListStories addNextPage={this.addNextPage} data={{ isLoading, isError, items }} />
     )
   }
 }
@@ -43,8 +48,9 @@ ContainerListStories.propTypes = {
 
 const mapStateToProps = state => {
   const { selectedType, content } = state;
-  const { isLoading, isError, items } = content[selectedType] || { isLoading: false, isError: false, items: [] };
-  return { isLoading, isError, items, selectedType }
+  const { isLoading, isError, items, page } =
+    content[selectedType] || { isLoading: false, isError: false, items: [], page: 0 };
+  return { selectedType, isLoading, isError, items, page }
 };
 
 export default compose(

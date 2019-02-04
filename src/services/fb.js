@@ -46,7 +46,6 @@ export class Firebase {
   async getPage(type, page) {
     const ids = await this.getStories(type);
     const items = await this.getItems(ids, page);
-    console.log(items);
     return items
   }
 }

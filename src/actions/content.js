@@ -12,10 +12,11 @@ const getContentRequest = typeContent => ({
   typeContent
 });
 
-const getContentSuccess = (typeContent, items) => ({
+const getContentSuccess = (typeContent, items, page) => ({
   type: GET_CONTENT_SUCCESS,
   typeContent,
-  items
+  items,
+  page
 });
 
 const getContentError = (typeContent, error) => ({
@@ -31,10 +32,19 @@ export const selectTypeContent = typeContent => ({
 
 // thunk functions
 
-const asyncGetContent = (typeContent, page, firebase) => dispatch => {
+const setPage = (typeContent, items, page, dispatch, state) => {
+  const oldPage = page !== 0 ? state.content[typeContent].items : [];
+  const updatePage = [
+    ...oldPage,
+    ...items
+  ];
+  dispatch(getContentSuccess(typeContent, updatePage, page))
+};
+
+export const asyncGetContent = (typeContent, page, firebase) => (dispatch, getState) => {
   dispatch(getContentRequest(typeContent));
   firebase.getPage(typeContent, page)
-    .then(items => dispatch(getContentSuccess(typeContent, items)))
+    .then(items => setPage(typeContent, items, page, dispatch, getState()))
     .catch(error => dispatch(getContentError(typeContent, error)))
 };
 

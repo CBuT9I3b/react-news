@@ -36,7 +36,8 @@ function getContent(state = {
         ...state,
         isLoading: false,
         isError: false,
-        items: action.items
+        items: action.items,
+        page: action.page
       };
     default:
       return state
@@ -45,8 +46,8 @@ function getContent(state = {
 
 export function contentByType(state = {}, action) {
   switch (action.type) {
-    case GET_CONTENT_ERROR:
     case GET_CONTENT_SUCCESS:
+    case GET_CONTENT_ERROR:
     case GET_CONTENT_REQUEST:
       return {
         ...state,
