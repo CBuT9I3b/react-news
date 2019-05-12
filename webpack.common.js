@@ -1,14 +1,17 @@
 const path = require('path');
+
+const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UnglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js'
+  },
   output: {
-    path: path.join(__dirname, '/build'),
-    filename: 'index_bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].bundle.js',
+    path: path.resolve(__dirname, 'build')
   },
   module: {
     rules: [
@@ -22,7 +25,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
-        test: /\.(ttf|eot|woff|woff2)$/,
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            outputPath: 'images/'
+          }
+        }]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [{
           loader: 'file-loader',
           options: {
@@ -33,20 +45,13 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'index_bundle.css'
+      filename: '[name].bundle.css',
+      chunkFilename: '[id].bundle.css'
     }),
     new HtmlPlugin({
       template: './public/index.html'
     })
-  ],
-  optimization: {
-    minimizer: [
-      new UnglifyjsPlugin(),
-      new OptimizeCssAssetsPlugin()
-    ]
-  },
-  devServer: {
-    historyApiFallback: true
-  }
+  ]
 };
