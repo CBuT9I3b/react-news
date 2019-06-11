@@ -4,8 +4,9 @@ import {
   GET_CONTENT_SUCCESS,
   SELECT_TYPE_CONTENT
 } from '../actions'
+import { INITIAL_STATE } from '../constants'
 
-export function selectType(state = '', action) {
+export function selectType(state = null, action) {
   switch (action.type) {
     case SELECT_TYPE_CONTENT:
       return action.typeContent;
@@ -14,11 +15,7 @@ export function selectType(state = '', action) {
   }
 }
 
-function getContent(state = {
-  isLoading: false,
-  isError: false,
-  items: []
-}, action) {
+function getContent(state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_CONTENT_REQUEST:
       return {

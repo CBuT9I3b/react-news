@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+
+import { INITIAL_STATE } from '../constants'
 
 import { withFirebase } from '../services'
 import { selectTypeContent, getContentIfNeeded, asyncGetContent } from '../actions'
-import { ListStories } from '../components'
+
+import { Card, ListStories, Preloader } from '../components'
 
 class ContainerListStories extends Component {
   addNextPage = () => {
@@ -35,27 +38,51 @@ class ContainerListStories extends Component {
 
   render() {
     const { isLoading, isError, items } = this.props;
+
     return (
       <Fragment>
-        <ListStories data={{ isLoading, isError, items }} />
-        <button
-          onClick={this.addNextPage}
-          className="waves-effect waves-light btn"
-        >More Hacker News</button>
+        {items && (
+          <ListStories
+            isLoading={isLoading}
+            isError={isError}
+            items={items}
+          />
+        )}
+        {!items && !isLoading && (
+          <Card title='Error' text='No Stories' />
+        )}
+        {isLoading && (
+          <Preloader />
+        )}
+        {isError && (
+          <Card title='Error' text={isError} />
+        )}
+        {items && (
+          <button
+            onClick={this.addNextPage}
+            className='waves-effect waves-light btn'
+          >More</button>
+        )}
       </Fragment>
     )
   }
 }
 
 ContainerListStories.propTypes = {
+  selectedType: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired
+  isError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]),
+  items: PropTypes.array,
+  page: PropTypes.number.isRequired
 };
 
 const mapStateToProps = state => {
   const { selectedType, content } = state;
   const { isLoading, isError, items, page } =
-    content[selectedType] || { isLoading: false, isError: false, items: [], page: 0 };
+    content[selectedType] || INITIAL_STATE;
   return { selectedType, isLoading, isError, items, page }
 };
 

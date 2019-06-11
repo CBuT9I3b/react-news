@@ -1,3 +1,4 @@
+export { default as Preloader } from './Preloader'
 export { default as Card } from './Card'
 export { default as ListStories } from './ListStories'
 export { default as AboutUs } from './AboutUs'
