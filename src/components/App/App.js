@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { Routes } from '..'
 import { ContainerHeader } from '../../containers'
 
 const App = () => (
-  <div>
+  <Fragment>
     <ContainerHeader />
-    <div className='container'>
+    <main className='container'>
       <div className='row'>
         <Routes />
       </div>
-    </div>
-  </div>
+    </main>
+  </Fragment>
 );
 
 export default App

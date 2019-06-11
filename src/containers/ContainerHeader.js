@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { LinearProgress, NavBar } from '../components'
 
-class ContainerHeader extends Component {
-  render() {
-    const { isLoading } = this.props;
-    return (
-      <div>
-        {isLoading && <LinearProgress />}
-        <NavBar />
-      </div>
-    )
-  }
-}
+const ContainerHeader = ({ isLoading }) => (
+  <Fragment>
+    {isLoading && <LinearProgress />}
+    <NavBar />
+  </Fragment>
+);
 
 ContainerHeader.propTypes = {
   isLoading: PropTypes.bool.isRequired

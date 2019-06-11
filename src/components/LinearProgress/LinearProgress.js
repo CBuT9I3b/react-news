@@ -1,8 +1,8 @@
 import React from 'react'
 
 const LinearProgress = () => (
-  <div className='progress'>
-    <div className='indeterminate' />
+  <div className='progress transparent'>
+    <div className='indeterminate red' />
   </div>
 );
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { Card } from '..'
 
@@ -9,7 +9,7 @@ const ListStories = ({ data, addNextPage }) => {
   }
   if (items.length !== 0) {
     return (
-      <div>
+      <Fragment>
         {items.map(item => item && <Card data={item} key={item.id} />)}
         <div className='col l12 m12 s12'>
           <button
@@ -17,7 +17,7 @@ const ListStories = ({ data, addNextPage }) => {
             className="waves-effect waves-light btn"
           >More Hacker News</button>
         </div>
-      </div>
+      </Fragment>
     )
   }
   if (isLoading) {
