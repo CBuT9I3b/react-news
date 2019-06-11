@@ -19,7 +19,7 @@ const BlockLinksOther = () => (
   </Fragment>
 );
 
-const DropdownLinks = () => (
+const DropdownLinksNews = () => (
   <ul className='dropdown-content' id='dropdown-news'>
     <BlockLinksNews />
   </ul>
@@ -44,7 +44,7 @@ const SideNav = () => (
 );
 
 const SideNavTrigger = () => (
-  <a href='/' className='sidenav-trigger' data-target='mobile-nav'>
+  <a href='#!' className='sidenav-trigger' data-target='mobile-nav'>
     <i className='material-icons'>menu</i>
   </a>
 );
@@ -64,7 +64,7 @@ const NavBarLinks = () => (
   </ul>
 );
 
-const NavBarContent = () => (
+const NavBar = () => (
   <div className='navbar-fixed'>
     <nav>
       <div className='nav-wrapper blue'>
@@ -76,12 +76,12 @@ const NavBarContent = () => (
   </div>
 );
 
-const NavBar = () => (
+const Header = () => (
   <header>
-    <DropdownLinks />
-    <NavBarContent />
+    <DropdownLinksNews />
+    <NavBar />
     <SideNav />
   </header>
 );
 
-export default NavBar
+export default Header

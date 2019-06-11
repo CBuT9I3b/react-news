@@ -2,12 +2,12 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { LinearProgress, NavBar } from '../components'
+import { LinearProgress, Header } from '../components'
 
 const ContainerHeader = ({ isLoading }) => (
   <Fragment>
     {isLoading && <LinearProgress />}
-    <NavBar />
+    <Header />
   </Fragment>
 );
 

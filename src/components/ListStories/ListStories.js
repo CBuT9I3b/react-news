@@ -1,29 +1,21 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { Card } from '..'
 
-const ListStories = ({ data, addNextPage }) => {
+const ListStories = ({ data }) => {
   const { isLoading, isError, items } = data;
   if (isError) {
-    return <Card data={{title: 'Error', text: isError}} />
+    return <Card data={{ title: 'Error', text: isError }} />
   }
   if (items.length !== 0) {
-    return (
-      <Fragment>
-        {items.map(item => item && <Card data={item} key={item.id} />)}
-        <div className='col l12 m12 s12'>
-          <button
-            onClick={addNextPage}
-            className="waves-effect waves-light btn"
-          >More Hacker News</button>
-        </div>
-      </Fragment>
-    )
+    return [
+      items.map(item => item && <Card data={item} key={item.id} />)
+    ]
   }
   if (isLoading) {
-    return <Card data={{text: 'Loading...'}} />
+    return <Card data={{ text: 'Loading...' }} />
   }
-  return <Card data={({title: 'Error', text: 'No Stories'})} />
+  return <Card data={({ title: 'Error', text: 'No Stories' })} />
 };
 
 export default ListStories

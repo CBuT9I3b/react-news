@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -36,7 +36,13 @@ class ContainerListStories extends Component {
   render() {
     const { isLoading, isError, items } = this.props;
     return (
-      <ListStories addNextPage={this.addNextPage} data={{ isLoading, isError, items }} />
+      <Fragment>
+        <ListStories data={{ isLoading, isError, items }} />
+        <button
+          onClick={this.addNextPage}
+          className="waves-effect waves-light btn"
+        >More Hacker News</button>
+      </Fragment>
     )
   }
 }
