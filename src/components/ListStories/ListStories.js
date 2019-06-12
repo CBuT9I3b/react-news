@@ -1,9 +1,15 @@
 import React from 'react'
 
-import { Card } from '..'
+import { Card, Modal } from '..'
 
 const ListStories = ({ items }) => (
-  items.map(item => item && <Card {...item} key={item.id} />)
+  items.map(item => item && (
+    <Modal
+      {...item}
+      key={item.id}
+      trigger={<Card {...item} />}
+    />
+  ))
 );
 
 export default ListStories

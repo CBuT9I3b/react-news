@@ -1,5 +1,5 @@
 {
   "projects": {
-    "react-hnews": "react-hnews"
+    "default": "react-hnews"
   }
 }

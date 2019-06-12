@@ -49,15 +49,15 @@ class ContainerListStories extends Component {
           />
         )}
         {!items && !isLoading && (
-          <Card title='Error' text='No Stories' />
+          <Card title='Error' message='No Stories' />
         )}
         {isLoading && (
           <Preloader />
         )}
         {isError && (
-          <Card title='Error' text={isError} />
+          <Card title='Error' message={isError} />
         )}
-        {items && (
+        {items && !isLoading && (
           <button
             onClick={this.addNextPage}
             className='waves-effect waves-light btn'
