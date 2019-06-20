@@ -51,7 +51,10 @@ class ContainerListStories extends Component {
         {!items && !isLoading && (
           <Card title='Error' message='No Stories' />
         )}
-        {isLoading && (
+        {!items && isLoading && (
+          <Card title='Loading...' time={new Date() / 1000} />
+        )}
+        {items && isLoading && (
           <Preloader />
         )}
         {isError && (

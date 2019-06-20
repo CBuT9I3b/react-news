@@ -2,28 +2,28 @@ import React, { Fragment } from 'react'
 
 import { NavLink } from 'react-router-dom'
 
+const NavLinkWithStyle = ({ to, title }) => (
+  <NavLink to={to} activeClassName='blue darken-4 white-text'>{title}</NavLink>
+);
+
 const BlockLinksNews = () => (
   <Fragment>
-    <li><NavLink to='/new'>New</NavLink></li>
-    <li><NavLink to='/top'>Top</NavLink></li>
-    <li><NavLink to='/best'>Best</NavLink></li>
+    <li><NavLinkWithStyle to='/new' title='New' /></li>
+    <li><NavLinkWithStyle to='/top' title='Top' /></li>
+    <li><NavLinkWithStyle to='/best' title='Best' /></li>
   </Fragment>
 );
 
 const BlockLinksOther = () => (
   <Fragment>
-    <li><NavLink to='/ask'>Ask</NavLink></li>
-    <li><NavLink to='/show'>Show</NavLink></li>
-    <li><NavLink to='/job'>Job</NavLink></li>
+    <li><NavLinkWithStyle to='/ask' title='Ask' /></li>
+    <li><NavLinkWithStyle to='/show' title='Show' /></li>
+    <li><NavLinkWithStyle to='/job' title='Job' /></li>
   </Fragment>
 );
 
 const Header = () => (
   <header>
-    <ul className='dropdown-content' id='dropdown-news'>
-      <BlockLinksNews />
-    </ul>
-
     <div className='navbar-fixed'>
       <nav>
         <div className='nav-wrapper blue'>
@@ -33,11 +33,9 @@ const Header = () => (
           <NavLink to='/' className='brand-logo right hide-on-med-and-down'>React Hacker News</NavLink>
           <NavLink to='/' className='brand-logo center hide-on-large-only'>RHN</NavLink>
           <ul className='left hide-on-med-and-down'>
-            <li><a href='#!' className='dropdown-trigger' data-target='dropdown-news'>
-              News<i className='material-icons right'>arrow_drop_down</i>
-            </a></li>
+            <BlockLinksNews />
             <BlockLinksOther />
-            <li><NavLink to='/about'>About Us</NavLink></li>
+            <li><NavLinkWithStyle to='/about' title='About Us' /></li>
           </ul>
         </div>
       </nav>
@@ -50,7 +48,7 @@ const Header = () => (
       <li className='divider' />
       <BlockLinksOther />
       <li className='divider' />
-      <li><NavLink to='/about'>About Us</NavLink></li>
+      <li><NavLinkWithStyle to='/about' title='About Us' /></li>
     </ul>
   </header>
 );

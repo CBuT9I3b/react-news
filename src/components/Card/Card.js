@@ -7,7 +7,7 @@ const Card = ({ title, time, message, onClick }) => (
 
       {message && <p>{message}</p>}
 
-      {time && <small>{new Date((time * 1000)).toLocaleString()}</small>}
+      {time && <small>{new Date(time * 1000).toLocaleString()}</small>}
     </div>
   </div>
 );
