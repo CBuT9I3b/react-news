@@ -4,9 +4,9 @@ import { compose } from 'redux'
 
 import { withFirebase } from '../services'
 
-import { Modal } from '../components'
+import { ModalItem } from '../components'
 
-class ContainerModal extends Component {
+class ContainerModalItem extends Component {
   onBack = event => {
     let { history } = this.props;
     event.stopPropagation();
@@ -17,7 +17,7 @@ class ContainerModal extends Component {
     let { foundItem } = this.props;
 
     return (
-      <Modal
+      <ModalItem
         {...foundItem}
         onBack={this.onBack}
       />
@@ -27,7 +27,7 @@ class ContainerModal extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   let { content } = state;
-  let { id } = ownProps.match.params;
+  let { id } = ownProps;
   let foundItem = null;
 
   Object.keys(content).forEach(typeContent => {
@@ -43,4 +43,4 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
   withFirebase,
   connect(mapStateToProps)
-)(ContainerModal)
+)(ContainerModalItem)

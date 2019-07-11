@@ -13,7 +13,7 @@ const styleModal = {
   top: '10%'
 };
 
-const Modal = ({ onBack, title, type, by, time, text, url, score, kids }) => (
+const ModalItem = ({ onBack, title, type, by, time, text, url, score, kids }) => (
   <Fragment>
     <div onClick={onBack} style={styleOverlay} className='modal-overlay' />
     <div style={styleModal} className='modal'>
@@ -47,4 +47,4 @@ const Modal = ({ onBack, title, type, by, time, text, url, score, kids }) => (
   </Fragment>
 );
 
-export default Modal
+export default ModalItem

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { Card } from '..'
 
-const ListStories = ({ items }) => (
+const ListItems = ({ items }) => (
   items.map(item => item && (
     <Link
       key={item.id}
@@ -18,4 +18,4 @@ const ListStories = ({ items }) => (
   ))
 );
 
-export default ListStories
+export default ListItems

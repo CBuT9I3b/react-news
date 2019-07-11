@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Card = ({ title, time, message, onClick }) => (
-  <div className='card hoverable blue-grey lighten-5' onClick={onClick}>
+const Card = ({ title, time, message }) => (
+  <div className='card hoverable blue-grey lighten-5'>
     <div className='card-content'>
       {title && <span className='card-title'>{title}</span>}
 

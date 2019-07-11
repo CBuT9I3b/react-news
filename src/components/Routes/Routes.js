@@ -2,10 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { Card } from '..'
-import { ContainerListStories, ContainerModal } from '../../containers'
+import { ContainerListItems, ContainerModalItem } from '../../containers'
 
-const List = ({ match }) => (
-  <ContainerListStories type={match.params.type} />
+const ListItems = ({ match }) => (
+  <ContainerListItems type={match.params.type} />
+);
+
+const ModalItem = ({ match, history }) => (
+  <ContainerModalItem id={match.params.id} history={history} />
 );
 
 class ModalSwitch extends Component {
@@ -27,11 +31,11 @@ class ModalSwitch extends Component {
       <Fragment>
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
-          <Route path='/:type(new|top|best|ask|show|job)' component={List} />
+          <Route path='/:type(new|top|best|ask|show|job)' component={ListItems} />
           <Route path='/about' render={() => <Card title='About Us' message='About Us' />} />
           <Route path='/:id' render={() => <Card title='Error' message='Page Not Found' />} />
         </Switch>
-        {isModal ? <Route path='/:id' component={ContainerModal} /> : null}
+        {isModal ? <Route path='/:id' component={ModalItem} /> : null}
       </Fragment>
     )
   }

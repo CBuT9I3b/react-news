@@ -8,9 +8,9 @@ import { INITIAL_STATE } from '../constants'
 import { withFirebase } from '../services'
 import { selectTypeContent, asyncGetContent, getContentIfNeeded } from '../actions'
 
-import { Card, ListStories, Preloader } from '../components'
+import { Card, ListItems, Preloader } from '../components'
 
-class ContainerListStories extends Component {
+class ContainerListItems extends Component {
   addNextPage = () => {
     let { firebase, dispatch, selectedType, page } = this.props;
 
@@ -45,7 +45,7 @@ class ContainerListStories extends Component {
     return (
       <Fragment>
         {items && (
-          <ListStories
+          <ListItems
             isLoading={isLoading}
             isError={isError}
             items={items}
@@ -74,7 +74,7 @@ class ContainerListStories extends Component {
   }
 }
 
-ContainerListStories.propTypes = {
+ContainerListItems.propTypes = {
   selectedType: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.oneOfType([
@@ -95,4 +95,4 @@ const mapStateToProps = state => {
 export default compose(
   withFirebase,
   connect(mapStateToProps)
-)(ContainerListStories)
+)(ContainerListItems)

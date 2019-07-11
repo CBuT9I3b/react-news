@@ -1,7 +1,13 @@
 import React from 'react'
 
+const style = {
+  position: 'fixed',
+  margin: '0 0 0 0',
+  zIndex: '1000'
+};
+
 const LinearProgress = () => (
-  <div className='progress red lighten-4'>
+  <div style={style} className='progress red lighten-4'>
     <div className='indeterminate red' />
   </div>
 );
