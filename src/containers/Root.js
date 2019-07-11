@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { configureStore } from '../store'
 
@@ -13,9 +13,9 @@ const store = configureStore();
 const Root = () => (
   <Provider store={store}>
     <FirebaseContext.Provider value={new Firebase()}>
-      <BrowserRouter>
+      <Router>
         <App />
-      </BrowserRouter>
+      </Router>
     </FirebaseContext.Provider>
   </Provider>
 );

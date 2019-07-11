@@ -16,8 +16,8 @@ ContainerHeader.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { selectedType, content } = state;
-  const { isLoading } = content[selectedType] || { isLoading: false };
+  let { selectedType, content } = state;
+  let { isLoading } = content[selectedType] || { isLoading: false };
   return { isLoading }
 };
 

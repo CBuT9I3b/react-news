@@ -32,19 +32,19 @@ export const selectTypeContent = typeContent => ({
 
 // thunk functions
 
-const setPage = (typeContent, items, page, dispatch, state) => {
+const updatePage = (typeContent, page, items, dispatch, state) => {
   const oldPage = page !== 0 ? state.content[typeContent].items : [];
-  const updatePage = [
+  const newPage = [
     ...oldPage,
     ...items
   ];
-  dispatch(getContentSuccess(typeContent, updatePage, page))
+  dispatch(getContentSuccess(typeContent, newPage, page))
 };
 
 export const asyncGetContent = (typeContent, page, firebase) => (dispatch, getState) => {
   dispatch(getContentRequest(typeContent));
   firebase.getPage(typeContent, page)
-    .then(items => setPage(typeContent, items, page, dispatch, getState()))
+    .then(items => updatePage(typeContent, page, items, dispatch, getState()))
     .catch(error => dispatch(getContentError(typeContent, error)))
 };
 

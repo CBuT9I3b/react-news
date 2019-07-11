@@ -1,90 +1,50 @@
-import React, { Component, Fragment } from 'react'
-import { createPortal } from 'react-dom'
-import M from 'materialize-css'
+import React, { Fragment } from 'react'
 
-class Modal extends Component {
-  constructor(props) {
-    super(props);
-    this.createRoot()
-  }
+const styleOverlay = {
+  zIndex: '1002',
+  display: 'block',
+  opacity: '0.5'
+};
 
-  createRoot = () => {
-    this.modalRoot = document.createElement('div');
-    document.body.appendChild(this.modalRoot)
-  };
+const styleModal = {
+  zIndex: '1003',
+  display: 'block',
+  opacity: '1',
+  top: '10%'
+};
 
-  componentDidMount() {
-    this.modal = M.Modal.init(this._modal)
-  }
+const Modal = ({ onBack, title, type, by, time, text, url, score, kids }) => (
+  <Fragment>
+    <div onClick={onBack} style={styleOverlay} className='modal-overlay' />
+    <div style={styleModal} className='modal'>
+      <div className='modal-content'>
+        {title && <h5>{title}</h5>}
 
-  componentWillUnmount() {
-    document.body.removeChild(this.modalRoot);
-    this.modal && this.modal.destroy()
-  }
+        <p>
+          {type && by && `${type} by ${by} | `}
 
-  renderModal = () => {
-    let { title, type, by, text, url, kids, score, time } = this.props;
+          {time && new Date((time * 1000)).toLocaleString()}
+        </p>
 
-    return (
-      this.modalRoot && createPortal(
-        <div
-          ref={ div => { this._modal = div } }
-          className='modal no-autoinit'
-        >
-          <div className='modal-content'>
-            {title && <h5>{title}</h5>}
+        {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 
-            <p>
-              {type && by && `${type} by ${by} | `}
+        {url && (
+          <p><a href={url} target='_blank' rel='noreferrer noopener'>
+            {url.split('/')[2]}
+          </a></p>
+        )}
 
-              {time && new Date((time * 1000)).toLocaleString()}
-            </p>
+        <p>
+          {score && `${score} points `}
 
-            {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
-
-            {url && (
-              <p><a href={url} target='_blank' rel='noreferrer noopener'>
-                {url.split('/')[2]}
-              </a></p>
-            )}
-
-            <p>
-              {score && `${score} points `}
-
-              {kids && `${kids.length} comments`}
-            </p>
-          </div>
-          <div className='modal-footer'>
-            <button className='btn-flat waves-effect waves-red modal-close'>
-              Close
-            </button>
-          </div>
-        </div>,
-        this.modalRoot
-      )
-    )
-  };
-
-  onOpen = event => {
-    event && event.preventDefault();
-    this.modal && this.modal.open()
-  };
-
-  onClose = event => {
-    event && event.preventDefault();
-    this.modal && this.modal.close()
-  };
-
-  render() {
-    let { trigger } = this.props;
-
-    return (
-      <Fragment>
-        { trigger && React.cloneElement(trigger, { onClick: this.onOpen }) }
-        { this.renderModal() }
-      </Fragment>
-    )
-  }
-}
+          {kids && `${kids.length} comments`}
+        </p>
+      </div>
+      <div className='modal-footer'>
+        <button onClick={onBack} className='btn-flat waves-effect waves-red'>Close</button>
+      </div>
+    </div>
+  </Fragment>
+);
 
 export default Modal

@@ -6,19 +6,21 @@ import { compose } from 'redux'
 import { INITIAL_STATE } from '../constants'
 
 import { withFirebase } from '../services'
-import { selectTypeContent, getContentIfNeeded, asyncGetContent } from '../actions'
+import { selectTypeContent, asyncGetContent, getContentIfNeeded } from '../actions'
 
 import { Card, ListStories, Preloader } from '../components'
 
 class ContainerListStories extends Component {
   addNextPage = () => {
-    const { firebase, dispatch, selectedType, page } = this.props;
+    let { firebase, dispatch, selectedType, page } = this.props;
+
     dispatch(asyncGetContent(selectedType, page + 1, firebase))
   };
 
   componentDidMount() {
-    const { firebase, dispatch, type, selectedType, page } = this.props;
-    if (selectedType !== type) {
+    let { firebase, dispatch, type, selectedType, page } = this.props;
+
+    if (type !== selectedType) {
       dispatch(selectTypeContent(type))
     }
     if (selectedType) {
@@ -27,7 +29,8 @@ class ContainerListStories extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { firebase, dispatch, type, selectedType, page } = this.props;
+    let { firebase, dispatch, type, selectedType, page } = this.props;
+
     if (type !== prevProps.type) {
       dispatch(selectTypeContent(type))
     }
@@ -83,8 +86,8 @@ ContainerListStories.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { selectedType, content } = state;
-  const { isLoading, isError, items, page } =
+  let { selectedType, content } = state;
+  let { isLoading, isError, items, page } =
     content[selectedType] || INITIAL_STATE;
   return { selectedType, isLoading, isError, items, page }
 };

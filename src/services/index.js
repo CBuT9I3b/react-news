@@ -1,2 +1,2 @@
-export * from './fb'
+export * from './firebase'
 export * from './context'
