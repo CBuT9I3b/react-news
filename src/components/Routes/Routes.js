@@ -2,10 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { Card } from '..'
-import { ContainerListItems, ContainerModalItem } from '../../containers'
+import { ContainerListItems, ContainerItem, ContainerModalItem } from '../../containers'
 
 const ListItems = ({ match }) => (
   <ContainerListItems type={match.params.type} />
+);
+
+const Item = ({ match }) => (
+  <ContainerItem id={match.params.id} />
 );
 
 const ModalItem = ({ match, history }) => (
@@ -33,7 +37,7 @@ class ModalSwitch extends Component {
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItems} />
           <Route path='/about' render={() => <Card title='About Us' message='About Us' />} />
-          <Route path='/:id' render={() => <Card title='Error' message='Page Not Found' />} />
+          <Route path='/:id' component={Item} />
         </Switch>
         {isModal ? <Route path='/:id' component={ModalItem} /> : null}
       </Fragment>
