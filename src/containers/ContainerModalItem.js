@@ -7,6 +7,14 @@ import { withFirebase } from '../services'
 import { ModalItem } from '../components'
 
 class ContainerModalItem extends Component {
+  componentWillMount() {
+    document.body.style.overflowY = 'hidden'
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflowY = 'scroll'
+  }
+
   onBack = event => {
     let { history } = this.props;
     event.stopPropagation();

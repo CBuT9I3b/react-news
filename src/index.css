@@ -1,7 +1,4 @@
-html {
-  width: 100vw;
-}
-
 body {
   background-color: #eceff1;
+  overflow-y: scroll;
 }

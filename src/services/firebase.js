@@ -29,7 +29,10 @@ export class Firebase {
 
   async getStories(type) {
     const stories = await this.storiesRef(type).once('value');
-    return this.data[type] = stories.val()
+    const idsWithoutNull = stories.val().filter(id => id !== null);
+    const uniqueIds = new Set(idsWithoutNull);
+    const newStories = Array.from(uniqueIds.values());
+    return this.data[type] = newStories
   }
 
   async getItems(ids, page) {
