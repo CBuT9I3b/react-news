@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { withFirebase } from '../services'
 
-import { Item } from '../components'
+import { Card, Article } from '../components'
 
 class ContainerItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: null
+      item: null,
+      isLoading: false,
+      isError: false
     }
   }
 
@@ -32,17 +34,23 @@ class ContainerItem extends Component {
   getItem = id => {
     let { firebase } = this.props;
 
+    this.setState({ isLoading: true });
     firebase.getItem(id)
-      .then(item => (
-        this.setState({ item: item })
-      ))
+      .then(item => this.setState({ item: item, isLoading: false }))
+      .catch(error => this.setState({ isLoading: false, isError: error }))
   };
 
   render() {
-    let { item } = this.state;
+    let { item, isLoading, isError } = this.state;
 
     return (
-      item ? <Item {...item} /> : null
+      <Fragment>
+        {isLoading && <Card title='Loading...' time={new Date() / 1000} />}
+
+        {isError && <Card title='Error' message={isError} />}
+
+        {item && <Card><Article {...item} /></Card>}
+      </Fragment>
     )
   }
 }

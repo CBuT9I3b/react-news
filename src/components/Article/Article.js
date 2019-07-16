@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
-const Item = ({ title, type, by, time, text, url, score, kids }) => (
-  <div className='card-panel'>
+const Article = ({ title, type, by, time, text, url, score, kids }) => (
+  <Fragment>
     {title && <h5>{title}</h5>}
 
     <p>
@@ -23,7 +23,7 @@ const Item = ({ title, type, by, time, text, url, score, kids }) => (
 
       {kids && `${kids.length} comments`}
     </p>
-  </div>
+  </Fragment>
 );
 
-export default Item
+export default Article

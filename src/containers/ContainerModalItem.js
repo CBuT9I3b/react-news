@@ -14,11 +14,11 @@ class ContainerModalItem extends Component {
   };
 
   render() {
-    let { foundItem } = this.props;
+    let { item } = this.props;
 
     return (
       <ModalItem
-        {...foundItem}
+        item={item}
         onBack={this.onBack}
       />
     )
@@ -28,16 +28,16 @@ class ContainerModalItem extends Component {
 const mapStateToProps = (state, ownProps) => {
   let { content } = state;
   let { id } = ownProps;
-  let foundItem = null;
+  let item = null;
 
   Object.keys(content).forEach(typeContent => {
     let searchResult = content[typeContent].items.find(item => item.id === +id);
     if (searchResult) {
-      foundItem = searchResult
+      item = searchResult
     }
   });
 
-  return { foundItem }
+  return { item }
 };
 
 export default compose(

@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Card = ({ title, time, message }) => (
-  <div className='card hoverable'>
-    <div className='card-content'>
-      {title && <span className='card-title'>{title}</span>}
+const Card = ({ children, title, time, message }) => (
+  <div className='card-panel'>
+    {title && <h5>{title}</h5>}
 
-      {message && <p>{message}</p>}
+    {message && <p>{message}</p>}
 
-      {time && <small>{new Date(time * 1000).toLocaleString()}</small>}
-    </div>
+    {time && <small>{new Date(time * 1000).toLocaleString()}</small>}
+
+    {!title && !message && !title && children}
   </div>
 );
 
