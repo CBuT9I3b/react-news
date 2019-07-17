@@ -23,32 +23,37 @@ export class Firebase {
   }
 
   async getItem(id) {
-    const item = await this.itemRef(id).once('value');
+    let item = await this.itemRef(id).once('value');
     return item.val()
   }
 
   async getStories(type) {
-    const stories = await this.storiesRef(type).once('value');
-    const idsWithoutNull = stories.val().filter(id => id !== null);
-    const uniqueIds = new Set(idsWithoutNull);
-    const newStories = Array.from(uniqueIds.values());
-    return this.data[type] = newStories
+    let stories = await this.storiesRef(type).once('value');
+    let idsWithoutNull = stories.val().filter(id => id !== null);
+    let uniqueIds = new Set(idsWithoutNull);
+    let newStories = Array.from(uniqueIds.values());
+    this.data[type] = newStories;
+    return newStories
   }
 
   async getItems(ids, page) {
     if (page === undefined) {
-      const items = await Promise.all(ids.map(id => this.getItem(id)));
-      return items
+      return await Promise.all(ids.map(id => this.getItem(id)))
     } else {
-      const startId = page * 5;
-      const items = await Promise.all(ids.splice(startId, 5).map(id => this.getItem(id)))
-      return items
+      let startId = page * 10;
+      return await Promise.all(ids.splice(startId, 10).map(id => this.getItem(id)))
     }
   }
 
   async getPage(type, page) {
-    const ids = await this.getStories(type);
-    const items = await this.getItems(ids, page);
-    return items
+    let ids = this.data[type];
+
+    if (ids) {
+      ids = this.data[type]
+    } else {
+      ids = await this.getStories(type)
+    }
+
+    return await this.getItems(ids, page)
   }
 }

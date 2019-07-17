@@ -17,8 +17,21 @@ class ContainerListItems extends Component {
     dispatch(asyncGetContent(selectedType, page + 1, firebase))
   };
 
+  handleScroll = () => {
+    let { isLoading } = this.props;
+    let element = document.documentElement;
+
+    if (!isLoading) {
+      if ((element.scrollTop + element.clientHeight) === element.scrollHeight) {
+        this.addNextPage()
+      }
+    }
+  };
+
   componentDidMount() {
     let { firebase, dispatch, type, selectedType, page } = this.props;
+
+    window.addEventListener('scroll', this.handleScroll);
 
     if (type !== selectedType) {
       dispatch(selectTypeContent(type))
@@ -37,6 +50,10 @@ class ContainerListItems extends Component {
     if (selectedType !== prevProps.selectedType) {
       dispatch(getContentIfNeeded(selectedType, page, firebase))
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 
   render() {
