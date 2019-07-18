@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -33,18 +34,15 @@ class ContainerModalItem extends Component {
   }
 }
 
+ContainerModalItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  item: PropTypes.object
+};
+
 const mapStateToProps = (state, ownProps) => {
-  let { content } = state;
+  let { selectedType, content } = state;
   let { id } = ownProps;
-  let item = null;
-
-  Object.keys(content).forEach(typeContent => {
-    let searchResult = content[typeContent].items.find(item => item.id === +id);
-    if (searchResult) {
-      item = searchResult
-    }
-  });
-
+  let item = content[selectedType].items.find(item => +id === item.id);
   return { item }
 };
 

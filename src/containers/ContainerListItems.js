@@ -92,6 +92,7 @@ class ContainerListItems extends Component {
 }
 
 ContainerListItems.propTypes = {
+  type: PropTypes.string,
   selectedType: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.oneOfType([

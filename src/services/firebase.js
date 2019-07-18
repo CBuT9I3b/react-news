@@ -29,19 +29,20 @@ export class Firebase {
 
   async getStories(type) {
     let stories = await this.storiesRef(type).once('value');
-    let idsWithoutNull = stories.val().filter(id => id !== null);
-    let uniqueIds = new Set(idsWithoutNull);
-    let newStories = Array.from(uniqueIds.values());
-    this.data[type] = newStories;
-    return newStories
+    this.data[type] = stories.val();
+    return stories.val()
   }
 
   async getItems(ids, page) {
+    let items;
     if (page === undefined) {
-      return await Promise.all(ids.map(id => this.getItem(id)))
+      items = await Promise.all(ids.map(id => this.getItem(id)));
+      return items.filter(id => id !== null)
     } else {
       let startId = page * 10;
-      return await Promise.all(ids.splice(startId, 10).map(id => this.getItem(id)))
+      let rangeId = ids.slice(startId, startId + 10);
+      items = await Promise.all(rangeId.map(id => this.getItem(id)));
+      return items.filter(id => id !== null)
     }
   }
 
