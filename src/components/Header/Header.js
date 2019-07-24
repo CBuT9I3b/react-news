@@ -42,7 +42,7 @@ const Header = () => (
     </div>
 
     <ul className='sidenav' id='mobile-nav'>
-      <li><a href='#!' className='subheader'>React Hacker News</a></li>
+      <li><a href='#!' className='sidenav-close'><i className='material-icons'>arrow_back</i>React Hacker News</a></li>
       <li className='divider' />
       <BlockLinksNews />
       <li className='divider' />
