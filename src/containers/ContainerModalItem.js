@@ -3,13 +3,22 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
+import { INITIAL_STATE_ITEM } from "../constants";
+
 import { withFirebase } from '../services'
+import { getItemIfNeeded } from '../actions'
 
 import { ModalItem } from '../components'
 
 class ContainerModalItem extends Component {
   componentWillMount() {
     document.body.style.overflowY = 'hidden'
+  }
+
+  componentDidMount() {
+    let { dispatch, id, firebase } = this.props;
+
+    dispatch(getItemIfNeeded(id, firebase))
   }
 
   componentWillUnmount() {
@@ -23,27 +32,33 @@ class ContainerModalItem extends Component {
   };
 
   render() {
-    let { item } = this.props;
+    let { isLoading, isError, item } = this.props;
 
     return (
       <ModalItem
+        isLoading={isLoading}
+        isError={isError}
         item={item}
         onBack={this.onBack}
       />
     )
   }
 }
-
 ContainerModalItem.propTypes = {
   id: PropTypes.string.isRequired,
-  item: PropTypes.object
+  isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]),
+  item: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
-  let { selectedType, content } = state;
+  let { itemsCache } = state;
   let { id } = ownProps;
-  let item = content[selectedType].items.find(item => +id === item.id);
-  return { item }
+  let { isLoading, isError, item } = itemsCache[id] || INITIAL_STATE_ITEM;
+  return { isLoading, isError, item }
 };
 
 export default compose(

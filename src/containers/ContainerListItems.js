@@ -3,18 +3,38 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { INITIAL_STATE } from '../constants'
+import { INITIAL_STATE_LIST } from '../constants'
 
 import { withFirebase } from '../services'
-import { selectTypeContent, asyncGetContent, getContentIfNeeded } from '../actions'
+import { asyncGetItems, getItemsIfNeeded } from '../actions'
 
-import { Card, ListItems, Preloader } from '../components'
+import { Card, ListItems } from '../components'
 
 class ContainerListItems extends Component {
-  addNextPage = () => {
-    let { firebase, dispatch, selectedType, page } = this.props;
+  componentDidMount() {
+    let { firebase, dispatch, type, page } = this.props;
 
-    dispatch(asyncGetContent(selectedType, page + 1, firebase))
+    window.addEventListener('scroll', this.handleScroll);
+
+    dispatch(getItemsIfNeeded(type, page, firebase))
+  }
+
+  componentDidUpdate(prevProps) {
+    let { firebase, dispatch, type, page } = this.props;
+
+    if (type !== prevProps.type) {
+      dispatch(getItemsIfNeeded(type, page, firebase))
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  addNextPage = () => {
+    let { firebase, dispatch, type, page } = this.props;
+
+    dispatch(asyncGetItems(type, page + 1, firebase))
   };
 
   handleScroll = () => {
@@ -28,34 +48,6 @@ class ContainerListItems extends Component {
     }
   };
 
-  componentDidMount() {
-    let { firebase, dispatch, type, selectedType, page } = this.props;
-
-    window.addEventListener('scroll', this.handleScroll);
-
-    if (type !== selectedType) {
-      dispatch(selectTypeContent(type))
-    }
-    if (selectedType) {
-      dispatch(getContentIfNeeded(selectedType, page, firebase))
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    let { firebase, dispatch, type, selectedType, page } = this.props;
-
-    if (type !== prevProps.type) {
-      dispatch(selectTypeContent(type))
-    }
-    if (selectedType !== prevProps.selectedType) {
-      dispatch(getContentIfNeeded(selectedType, page, firebase))
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
-
   render() {
     const { isLoading, isError, items } = this.props;
 
@@ -68,18 +60,19 @@ class ContainerListItems extends Component {
             items={items}
           />
         )}
+
+        {isLoading && (
+          <Card title='Loading...' time={new Date() / 1000} />
+        )}
+
         {!items && !isLoading && (
           <Card title='Error' message='No Stories' />
         )}
-        {!items && isLoading && (
-          <Card title='Loading...' time={new Date() / 1000} />
-        )}
-        {items && isLoading && (
-          <Preloader />
-        )}
+
         {isError && (
           <Card title='Error' message={isError} />
         )}
+
         {items && !isLoading && (
           <button
             onClick={this.addNextPage}
@@ -93,7 +86,6 @@ class ContainerListItems extends Component {
 
 ContainerListItems.propTypes = {
   type: PropTypes.string,
-  selectedType: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.oneOfType([
     PropTypes.bool,
@@ -103,11 +95,11 @@ ContainerListItems.propTypes = {
   page: PropTypes.number.isRequired
 };
 
-const mapStateToProps = state => {
-  let { selectedType, content } = state;
-  let { isLoading, isError, items, page } =
-    content[selectedType] || INITIAL_STATE;
-  return { selectedType, isLoading, isError, items, page }
+const mapStateToProps = (state, ownProps) => {
+  let { listsCache } = state;
+  let { type } = ownProps;
+  let { isLoading, isError, items, page } = listsCache[type] || INITIAL_STATE_LIST;
+  return { isLoading, isError, items, page }
 };
 
 export default compose(

@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
 
-import { selectType, contentByType } from '.'
+import { loadIndicator } from './loadIndicator'
+import { listItemsByType } from './listItems'
+import { itemById } from './item'
 
 export const rootReducer = combineReducers({
-  selectedType: selectType,
-  content: contentByType
+  loading: loadIndicator,
+  listsCache: listItemsByType,
+  itemsCache: itemById
 });

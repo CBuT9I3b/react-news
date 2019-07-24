@@ -1,58 +1,61 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+
+import { INITIAL_STATE_ITEM } from '../constants'
 
 import { withFirebase } from '../services'
+import { getItemIfNeeded } from '../actions'
 
 import { Card, Article } from '../components'
 
 class ContainerItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item: null,
-      isLoading: false,
-      isError: false
-    }
-  }
-
   componentDidMount() {
-    let { id } = this.props;
-    let { item } = this.state;
+    let { dispatch, id, firebase } = this.props;
 
-    if (!item) {
-      this.getItem(id)
-    }
+    dispatch(getItemIfNeeded(id, firebase))
   }
-
-  componentDidUpdate(prevProps) {
-    let { id } = this.props;
-
-    if (id !== prevProps.id) {
-      this.getItem(id)
-    }
-  }
-
-  getItem = id => {
-    let { firebase } = this.props;
-
-    this.setState({ isLoading: true });
-    firebase.getItem(id)
-      .then(item => this.setState({ item: item, isLoading: false }))
-      .catch(error => this.setState({ isLoading: false, isError: error }))
-  };
 
   render() {
-    let { item, isLoading, isError } = this.state;
+    let { isLoading, isError, item } = this.props;
 
     return (
       <Fragment>
-        {isLoading && <Card title='Loading...' time={new Date() / 1000} />}
+        {isLoading && (
+          <Card title='Loading...' time={new Date() / 1000} />
+        )}
 
-        {isError && <Card title='Error' message={isError} />}
+        {isError && (
+          <Card title='Error' message={isError} />
+        )}
 
-        {item && <Card><Article {...item} /></Card>}
+        {item && (
+          <Card><Article {...item} /></Card>
+        )}
       </Fragment>
     )
   }
 }
 
-export default withFirebase(ContainerItem)
+ContainerItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]),
+  item: PropTypes.object,
+};
+
+const mapStateToProps = (state, ownProps) => {
+  let { itemsCache } = state;
+  let { id } = ownProps;
+  let { isLoading, isError, item } = itemsCache[id] || INITIAL_STATE_ITEM;
+  return { isLoading, isError, item }
+};
+
+export default compose(
+  withFirebase,
+  connect(mapStateToProps)
+)(ContainerItem)

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { Article } from '..'
+import { Article, Info } from '..'
 
 const styleOverlay = {
   zIndex: '1002',
@@ -15,19 +15,25 @@ const styleModal = {
   top: '10%'
 };
 
-const ModalItem = ({ onBack, item }) => (
+const ModalItem = ({ isLoading, isError, item, onBack }) => (
   <Fragment>
     <div onClick={onBack} style={styleOverlay} className='modal-overlay' />
-    <div style={styleModal} className='modal'>
-      <div className='modal-content'>
-        <Article
-          {...item}
-        />
+    {!isLoading && (
+      <div style={styleModal} className='modal'>
+        <div className='modal-content'>
+          {isError && (
+            <Info title='Error' message={isError} />
+          )}
+
+          {item && (
+            <Article {...item} />
+          )}
+        </div>
+        <div className='modal-footer'>
+          <button onClick={onBack} className='btn-flat waves-effect waves-red'>Close</button>
+        </div>
       </div>
-      <div className='modal-footer'>
-        <button onClick={onBack} className='btn-flat waves-effect waves-red'>Close</button>
-      </div>
-    </div>
+    )}
   </Fragment>
 );
 

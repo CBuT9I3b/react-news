@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 const Article = ({ title, type, by, time, text, url, score, kids }) => (
   <Fragment>
-    {title && <h5>{title}</h5>}
+    {title && <h6><b>{title}</b></h6>}
 
     <p>
       {type && by && `${type} by ${by} | `}
