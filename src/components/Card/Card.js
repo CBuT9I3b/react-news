@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { Info } from '..'
+import { Info, Article } from '..'
 
-const Card = ({ children, title, time, message }) => (
+const Card = props => (
   <div className='card-panel'>
-    {children || <Info title={title} time={time} message={message} />}
+    {props.info ? <Info {...props} /> : <Article {...props} />}
   </div>
 );
 

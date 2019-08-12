@@ -5,9 +5,9 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
     {title && <h6><b>{title}</b></h6>}
 
     <p>
-      {type && by && `${type} by ${by} | `}
+      {time && `${new Date((time * 1000)).toLocaleString()} `}
 
-      {time && new Date((time * 1000)).toLocaleString()}
+      {type && by && `${type} by ${by}`}
     </p>
 
     {text && <p dangerouslySetInnerHTML={{ __html: text }} />}

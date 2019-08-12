@@ -11,12 +11,10 @@ import { getItemIfNeeded } from '../actions'
 import { ModalItem } from '../components'
 
 class ContainerModalItem extends Component {
-  componentWillMount() {
-    document.body.style.overflowY = 'hidden'
-  }
-
   componentDidMount() {
     let { dispatch, id, firebase } = this.props;
+
+    document.body.style.overflowY = 'hidden';
 
     dispatch(getItemIfNeeded(id, firebase))
   }

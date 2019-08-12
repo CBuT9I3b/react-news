@@ -1,12 +1,20 @@
 import React, { Fragment } from 'react'
 
-const Info = ({ title, time, message }) => (
+const Info = ({ title, message, time, type, by, score, kids }) => (
   <Fragment>
     {title && <h6><b>{title}</b></h6>}
 
-    {message && <p>{message}</p>}
+    <p>
+      {time && `${new Date((time * 1000)).toLocaleString()} `}
 
-    {time && <small>{new Date(time * 1000).toLocaleString()}</small>}
+      {type && by && `${type} by ${by} `}
+
+      {score && `${score} points `}
+
+      {kids && `${kids.length} comments`}
+    </p>
+
+    {message && <p>{message}</p>}
   </Fragment>
 );
 

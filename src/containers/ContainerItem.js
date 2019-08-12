@@ -8,7 +8,7 @@ import { INITIAL_STATE_ITEM } from '../constants'
 import { withFirebase } from '../services'
 import { getItemIfNeeded } from '../actions'
 
-import { Card, Article } from '../components'
+import { Card } from '../components'
 
 class ContainerItem extends Component {
   componentDidMount() {
@@ -23,15 +23,15 @@ class ContainerItem extends Component {
     return (
       <Fragment>
         {isLoading && (
-          <Card title='Loading...' time={new Date() / 1000} />
+          <Card info title='Loading...' time={new Date() / 1000} />
         )}
 
         {isError && (
-          <Card title='Error' message={isError} />
+          <Card info title='Error' message={isError} />
         )}
 
         {item && (
-          <Card><Article {...item} /></Card>
+          <Card {...item} />
         )}
       </Fragment>
     )

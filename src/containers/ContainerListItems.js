@@ -62,15 +62,15 @@ class ContainerListItems extends Component {
         )}
 
         {isLoading && (
-          <Card title='Loading...' time={new Date() / 1000} />
+          <Card info title='Loading...' time={new Date() / 1000} />
         )}
 
         {!items && !isLoading && (
-          <Card title='Error' message='No Stories' />
+          <Card info title='Error' message='No Stories' />
         )}
 
         {isError && (
-          <Card title='Error' message={isError} />
+          <Card info title='Error' message={isError} />
         )}
 
         {items && !isLoading && (

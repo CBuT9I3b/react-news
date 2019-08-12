@@ -21,10 +21,10 @@ const ModalItem = ({ match, history }) => (
 class ModalSwitch extends Component {
   prevLocation = this.props.location;
 
-  componentWillUpdate(nextProps) {
-    let { location } = this.props;
+  componentDidUpdate() {
+    let { history, location } = this.props;
 
-    if (nextProps.history.action !== 'POP' && (!location.state || !location.state.modal)) {
+    if (history.action !== 'POP' && (!location.state || !location.state.modal)) {
       this.prevLocation = location
     }
   }
@@ -38,7 +38,7 @@ class ModalSwitch extends Component {
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItems} />
-          <Route path='/about' render={() => <Card title='About Us' message={about} />} />
+          <Route path='/about' render={() => <Card info title='About Us' message={about} />} />
           <Route path='/:id' component={Item} />
         </Switch>
         {isModal ? <Route path='/:id' component={ModalItem} /> : null}
