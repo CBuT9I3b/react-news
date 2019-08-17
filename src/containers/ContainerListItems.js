@@ -3,27 +3,30 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { INITIAL_STATE_LIST } from '../constants'
+import { INITIAL_STATE_STORIES } from '../constants'
 
 import { withFirebase } from '../services'
-import { asyncGetItems, getItemsIfNeeded } from '../actions'
+import { getStoriesIfNeeded, getStoriesMore } from '../actions'
 
-import { Card, ListItems } from '../components'
+import { withCard } from '../hocs'
+import { Info, ListItems } from '../components'
+
+const CardInfo = withCard(Info);
 
 class ContainerListItems extends Component {
   componentDidMount() {
-    let { firebase, dispatch, type, page } = this.props;
+    let { dispatch, firebase, type } = this.props;
 
     window.addEventListener('scroll', this.handleScroll);
 
-    dispatch(getItemsIfNeeded(type, page, firebase))
+    dispatch(getStoriesIfNeeded(firebase, type))
   }
 
   componentDidUpdate(prevProps) {
-    let { firebase, dispatch, type, page } = this.props;
+    let { dispatch, firebase, type } = this.props;
 
     if (type !== prevProps.type) {
-      dispatch(getItemsIfNeeded(type, page, firebase))
+      dispatch(getStoriesIfNeeded(firebase, type))
     }
   }
 
@@ -31,10 +34,10 @@ class ContainerListItems extends Component {
     window.removeEventListener('scroll', this.handleScroll)
   }
 
-  addNextPage = () => {
-    let { firebase, dispatch, type, page } = this.props;
+  onMore = () => {
+    let { dispatch, type } = this.props;
 
-    dispatch(asyncGetItems(type, page + 1, firebase))
+    dispatch(getStoriesMore(type))
   };
 
   handleScroll = () => {
@@ -43,39 +46,37 @@ class ContainerListItems extends Component {
 
     if (!isLoading) {
       if ((element.scrollTop + element.clientHeight) === element.scrollHeight) {
-        this.addNextPage()
+        this.onMore()
       }
     }
   };
 
   render() {
-    const { isLoading, isError, items } = this.props;
+    let { isLoading, isError, stories, numberPerPage } = this.props;
 
     return (
       <Fragment>
-        {items && (
+        {stories && (
           <ListItems
-            isLoading={isLoading}
-            isError={isError}
-            items={items}
+            ids={stories.slice(0, numberPerPage)}
           />
         )}
 
         {isLoading && (
-          <Card info title='Loading...' time={new Date() / 1000} />
+          <CardInfo title='Loading' message='List of Stories is loading...' />
         )}
 
-        {!items && !isLoading && (
-          <Card info title='Error' message='No Stories' />
+        {!stories && !isLoading && (
+          <CardInfo title='Error' message='No Stories' />
         )}
 
         {isError && (
-          <Card info title='Error' message={isError} />
+          <CardInfo title='Error' message={isError} />
         )}
 
-        {items && !isLoading && (
+        {stories && !isLoading && (
           <button
-            onClick={this.addNextPage}
+            onClick={this.onMore}
             className='waves-effect waves-light btn'
           >More</button>
         )}
@@ -91,15 +92,15 @@ ContainerListItems.propTypes = {
     PropTypes.bool,
     PropTypes.string
   ]),
-  items: PropTypes.array,
-  page: PropTypes.number.isRequired
+  stories: PropTypes.array,
+  numberPerPage: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
-  let { listsCache } = state;
+  let { storiesCache } = state;
   let { type } = ownProps;
-  let { isLoading, isError, items, page } = listsCache[type] || INITIAL_STATE_LIST;
-  return { isLoading, isError, items, page }
+  let { isLoading, isError, stories, numberPerPage } = storiesCache[type] || INITIAL_STATE_STORIES;
+  return { isLoading, isError, stories, numberPerPage }
 };
 
 export default compose(

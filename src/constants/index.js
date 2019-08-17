@@ -1,8 +1,8 @@
-export const INITIAL_STATE_LIST = {
+export const INITIAL_STATE_STORIES = {
   isLoading: false,
   isError: false,
-  items: null,
-  page: 0
+  stories: null,
+  numberPerPage: 10
 };
 
 export const INITIAL_STATE_ITEM = {

@@ -1,7 +1,11 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { compose } from 'redux'
 
-import { Card } from '..'
+import { withCard, withItem } from '../../hocs'
+import { Item } from '..'
+
+const CardItem = compose(withCard, withItem)(Item);
 
 const MemoItem = memo(props => (
   <Link
@@ -11,12 +15,12 @@ const MemoItem = memo(props => (
     }}
     className='black-text'
   >
-    <Card info {...props} />
+    <CardItem mini id={props.id} />
   </Link>
 ));
 
-const ListItems = ({ items }) => (
-  items.map(item => item && <MemoItem key={item.id} {...item} />)
+const ListItems = ({ ids }) => (
+  ids.map(id => <MemoItem key={id} id={id} />)
 );
 
 export default ListItems

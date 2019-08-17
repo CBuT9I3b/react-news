@@ -5,13 +5,13 @@ const Info = ({ title, message, time, type, by, score, kids }) => (
     {title && <h6><b>{title}</b></h6>}
 
     <p>
-      {time && `${new Date((time * 1000)).toLocaleString()} `}
-
       {type && by && `${type} by ${by} `}
 
       {score && `${score} points `}
 
-      {kids && `${kids.length} comments`}
+      {kids && `${kids.length} comments `}
+
+      {time && `${new Date((time * 1000)).toLocaleString()}`}
     </p>
 
     {message && <p>{message}</p>}

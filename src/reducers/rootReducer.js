@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
 import { loadIndicator } from './loadIndicator'
-import { listItemsByType } from './listItems'
+import { storiesByType } from './stories'
 import { itemById } from './item'
 
 export const rootReducer = combineReducers({
   loading: loadIndicator,
-  listsCache: listItemsByType,
+  storiesCache: storiesByType,
   itemsCache: itemById
 });

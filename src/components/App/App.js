@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 
-import { Routes } from '..'
-import { ContainerHeader } from '../../containers'
+import { ContainerProgress } from '../../containers'
+import { Header, Routes } from '..'
 
 const App = () => (
   <Fragment>
-    <ContainerHeader />
+    <ContainerProgress />
+    <Header />
     <main className='container'>
       <div className='row'>
-        <br />
         <Routes />
       </div>
     </main>

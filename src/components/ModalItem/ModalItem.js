@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 
-import { Article, Info } from '..'
+import { withItem } from '../../hocs'
+
+import { Item } from '..'
 
 const styleOverlay = {
   zIndex: '1002',
@@ -15,26 +17,40 @@ const styleModal = {
   top: '10%'
 };
 
-const ModalItem = ({ isLoading, isError, item, onBack }) => (
-  <Fragment>
-    <div onClick={onBack} style={styleOverlay} className='modal-overlay' />
-    {!isLoading && (
-      <div style={styleModal} className='modal'>
-        <div className='modal-content'>
-          {isError && (
-            <Info title='Error' message={isError} />
-          )}
+class ModalItem extends Component {
+  componentDidMount() {
+    document.body.style.overflowY = 'hidden'
+  }
 
-          {item && (
-            <Article {...item} />
-          )}
-        </div>
-        <div className='modal-footer'>
-          <button onClick={onBack} className='btn-flat waves-effect waves-red'>Close</button>
-        </div>
-      </div>
-    )}
-  </Fragment>
-);
+  componentWillUnmount() {
+    document.body.style.overflowY = 'scroll'
+  }
 
-export default ModalItem
+  onBack = event => {
+    let { history } = this.props;
+    event.stopPropagation();
+    history.goBack()
+  };
+
+  render() {
+    let { isLoading, isError, item } = this.props;
+
+    return (
+      <Fragment>
+        <div onClick={this.onBack} style={styleOverlay} className='modal-overlay' />
+        {!isLoading && (
+          <div style={styleModal} className='modal'>
+            <div className='modal-content'>
+              <Item isError={isError} item={item} />
+            </div>
+            <div className='modal-footer'>
+              <button onClick={this.onBack} className='btn-flat waves-effect waves-red'>Close</button>
+            </div>
+          </div>
+        )}
+      </Fragment>
+    )
+  }
+}
+
+export default withItem(ModalItem)

@@ -1,21 +1,27 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import { compose } from 'redux'
 
-import { Card } from '..'
-import { ContainerListItems, ContainerItem, ContainerModalItem } from '../../containers'
+import { withCard, withItem } from '../../hocs'
+import { ContainerListItems } from '../../containers'
+import { Info, Item, ModalItem } from '..'
 
-const about = 'Mini hacker news clone implemented on react.js and redux.';
+const about = 'Mini hacker news clone implemented on react.js and redux.js';
 
-const ListItems = ({ match }) => (
+const CardInfo = withCard(Info);
+
+const ListItemsPage = ({ match }) => (
   <ContainerListItems type={match.params.type} />
 );
 
-const Item = ({ match }) => (
-  <ContainerItem id={match.params.id} />
+const CardItem = compose(withCard, withItem)(Item);
+
+const ItemPage = ({ match }) => (
+  <CardItem id={match.params.id} />
 );
 
-const ModalItem = ({ match, history }) => (
-  <ContainerModalItem id={match.params.id} history={history} />
+const ModalItemPage = ({ match, history }) => (
+  <ModalItem id={match.params.id} history={history} />
 );
 
 class ModalSwitch extends Component {
@@ -37,11 +43,11 @@ class ModalSwitch extends Component {
       <Fragment>
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
-          <Route path='/:type(new|top|best|ask|show|job)' component={ListItems} />
-          <Route path='/about' render={() => <Card info title='About Us' message={about} />} />
-          <Route path='/:id' component={Item} />
+          <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
+          <Route path='/about' render={() => <CardInfo title='About Us' message={about} />} />
+          <Route path='/:id' component={ItemPage} />
         </Switch>
-        {isModal ? <Route path='/:id' component={ModalItem} /> : null}
+        {isModal ? <Route path='/:id' component={ModalItemPage} /> : null}
       </Fragment>
     )
   }

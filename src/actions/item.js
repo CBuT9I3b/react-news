@@ -25,7 +25,7 @@ const getItemError = (id, error) => ({
 
 // thunk functions
 
-const asyncGetItem = (id, firebase) => dispatch => {
+const asyncGetItem = (firebase, id) => dispatch => {
   dispatch(getItemRequest(id));
   firebase.getItem(id)
     .then(item => dispatch(getItemSuccess(id, item)))
@@ -41,8 +41,8 @@ const shouldGetItem = (id, state) => {
   }
 };
 
-export const getItemIfNeeded = (id, firebase) => (dispatch, getState) => {
+export const getItemIfNeeded = (firebase, id) => (dispatch, getState) => {
   if (shouldGetItem(id, getState())) {
-    dispatch(asyncGetItem(id, firebase))
+    dispatch(asyncGetItem(firebase, id))
   }
 };
