@@ -1,4 +1,7 @@
 import React, { Fragment } from 'react'
+import TimeAgo from 'react-timeago'
+
+import { ListComments } from '..'
 
 const Article = ({ title, type, by, time, text, url, score, kids }) => (
   <Fragment>
@@ -7,7 +10,7 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
     <p>
       {type && by && `${type} by ${by} `}
 
-      {time && `${new Date((time * 1000)).toLocaleString()}`}
+      {time && <TimeAgo date={(time * 1000)} />}
     </p>
 
     {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
@@ -23,6 +26,8 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
 
       {kids && `${kids.length} comments`}
     </p>
+
+    {kids && <ListComments ids={kids} />}
   </Fragment>
 );
 

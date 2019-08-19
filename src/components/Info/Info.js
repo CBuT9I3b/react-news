@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import TimeAgo from 'react-timeago'
 
 const Info = ({ title, message, time, type, by, score, kids }) => (
   <Fragment>
@@ -11,7 +12,7 @@ const Info = ({ title, message, time, type, by, score, kids }) => (
 
       {kids && `${kids.length} comments `}
 
-      {time && `${new Date((time * 1000)).toLocaleString()}`}
+      {time && <TimeAgo date={(time * 1000)} />}
     </p>
 
     {message && <p>{message}</p>}

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { compose } from 'redux'
 
-import { withCard, withItem } from '../../hocs'
+import { withCard } from '../../hocs'
+
 import { ContainerListItems } from '../../containers'
 import { Info, Item, ModalItem } from '..'
 
@@ -14,7 +14,7 @@ const ListItemsPage = ({ match }) => (
   <ContainerListItems type={match.params.type} />
 );
 
-const CardItem = compose(withCard, withItem)(Item);
+const CardItem = withCard(Item);
 
 const ItemPage = ({ match }) => (
   <CardItem id={match.params.id} />

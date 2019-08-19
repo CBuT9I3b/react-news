@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react'
 
-import { withItem } from '../../hocs'
-
 import { Item } from '..'
 
 const styleOverlay = {
@@ -33,24 +31,22 @@ class ModalItem extends Component {
   };
 
   render() {
-    let { isLoading, isError, item } = this.props;
+    let { id } = this.props;
 
     return (
       <Fragment>
         <div onClick={this.onBack} style={styleOverlay} className='modal-overlay' />
-        {!isLoading && (
-          <div style={styleModal} className='modal'>
-            <div className='modal-content'>
-              <Item isError={isError} item={item} />
-            </div>
-            <div className='modal-footer'>
-              <button onClick={this.onBack} className='btn-flat waves-effect waves-red'>Close</button>
-            </div>
+        <div style={styleModal} className='modal'>
+          <div className='modal-content'>
+            <Item id={id} />
           </div>
-        )}
+          <div className='modal-footer'>
+            <button onClick={this.onBack} className='btn-flat waves-effect waves-red'>Close</button>
+          </div>
+        </div>
       </Fragment>
     )
   }
 }
 
-export default withItem(ModalItem)
+export default ModalItem

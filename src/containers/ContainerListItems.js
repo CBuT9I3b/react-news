@@ -7,8 +7,8 @@ import { INITIAL_STATE_STORIES } from '../constants'
 
 import { withFirebase } from '../services'
 import { getStoriesIfNeeded, getStoriesMore } from '../actions'
-
 import { withCard } from '../hocs'
+
 import { Info, ListItems } from '../components'
 
 const CardInfo = withCard(Info);

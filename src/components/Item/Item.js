@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
 
+import { withItem } from '../../hocs'
+
 import { Article, Info } from '..'
 
 const Item = ({ isLoading, isError, item, mini }) => (
@@ -22,4 +24,4 @@ const Item = ({ isLoading, isError, item, mini }) => (
   </Fragment>
 );
 
-export default Item
+export default withItem(Item)

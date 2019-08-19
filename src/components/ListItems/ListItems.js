@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
-import { compose } from 'redux'
 
-import { withCard, withItem } from '../../hocs'
+import { withCard } from '../../hocs'
+
 import { Item } from '..'
 
-const CardItem = compose(withCard, withItem)(Item);
+const CardItem = withCard(Item);
 
 const MemoItem = memo(props => (
   <Link
