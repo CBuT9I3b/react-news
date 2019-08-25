@@ -45,9 +45,9 @@ class ModalSwitch extends Component {
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
           <Route path='/about' render={() => <CardInfo title='About Us' message={about} />} />
-          <Route path='/:id' component={ItemPage} />
+          <Route path='/item/:id' component={ItemPage} />
         </Switch>
-        {isModal ? <Route path='/:id' component={ModalItemPage} /> : null}
+        {isModal ? <Route path='/item/:id' component={ModalItemPage} /> : null}
       </Fragment>
     )
   }

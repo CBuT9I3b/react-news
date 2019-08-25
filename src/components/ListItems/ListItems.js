@@ -10,7 +10,7 @@ const CardItem = withCard(Item);
 const MemoItem = memo(props => (
   <Link
     to={{
-      pathname: `/${props.id}`,
+      pathname: `/item/${props.id}`,
       state: { modal: true }
     }}
     className='black-text'

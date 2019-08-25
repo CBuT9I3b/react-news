@@ -21,6 +21,10 @@ const Item = ({ isLoading, isError, item, mini }) => (
     {item && !mini && (
       <Article {...item} />
     )}
+
+    {!isLoading && !isError && !item && (
+      <Info title='Error' message='Oops...' />
+    )}
   </Fragment>
 );
 

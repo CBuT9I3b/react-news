@@ -17,6 +17,10 @@ export class Firebase {
     return this.db.child(`item/${id}`)
   }
 
+  userRef(id) {
+    return this.db.child(`user/${id}`)
+  }
+
   storiesRef(type) {
     return this.db.child(`${type}stories`)
   }
@@ -24,6 +28,11 @@ export class Firebase {
   async getItem(id) {
     let item = await this.itemRef(id).once('value');
     return item.val()
+  }
+
+  async getUser(id) {
+    let user = await this.userRef(id).once('value');
+    return user.val()
   }
 
   async getStories(type) {

@@ -4,7 +4,7 @@ import { Comment } from '..'
 
 const ListComments = ({ ids }) => (
   <div>
-    {ids.map(id => id && <Comment key={id} id={id} />)}
+    {ids.map((id, index) => id && <Comment key={id} id={id} index={index} />)}
   </div>
 );
 

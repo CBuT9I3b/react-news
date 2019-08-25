@@ -11,10 +11,14 @@ const style = {
   borderTop: '1px solid #b0bec5'
 };
 
-const Comment = ({ item }) => (
-  <div style={style}>
+const Comment = ({ index, isLoading, item }) => (
+  <Fragment>
+    {isLoading && index === 0 && (
+      <p>Comments are loading...</p>
+    )}
+
     {item && (
-      <Fragment>
+      <div style={style}>
         <p>
           {item.type && item.by && `${item.type} by ${item.by} `}
 
@@ -24,9 +28,9 @@ const Comment = ({ item }) => (
         {item.text && <p dangerouslySetInnerHTML={{ __html: item.text }} />}
 
         {item.kids && <ListComments ids={item.kids} />}
-      </Fragment>
+      </div>
     )}
-  </div>
+  </Fragment>
 );
 
 export default withItem(Comment)

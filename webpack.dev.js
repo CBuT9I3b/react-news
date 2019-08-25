@@ -5,7 +5,10 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: '/build',
+    publicPath: '/',
+    open: true,
+    hot: true,
+    overlay: true,
     historyApiFallback: true
   }
 });
