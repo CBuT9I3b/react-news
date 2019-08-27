@@ -10,3 +10,9 @@ export const INITIAL_STATE_ITEM = {
   isError: false,
   item: null
 };
+
+export const INITIAL_STATE_USER = {
+  isLoading: false,
+  isError: false,
+  user: null
+};
