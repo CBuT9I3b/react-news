@@ -7,11 +7,13 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
   <Fragment>
     {title && <h6><b>{title}</b></h6>}
 
-    <p>
-      {type && by && `${type} by ${by} `}
+    {!!(type || by || time) && (
+      <p>
+        {type && by && `${type} by ${by} `}
 
-      {time && <TimeAgo date={(time * 1000)} />}
-    </p>
+        {time && <TimeAgo date={(time * 1000)} />}
+      </p>
+    )}
 
     {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 
@@ -21,11 +23,13 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
       </a></p>
     )}
 
-    <p>
-      {score && `${score} points `}
+    {!!(score || kids) && (
+      <p>
+        {score && `${score} points `}
 
-      {kids && `${kids.length} comments`}
-    </p>
+        {kids && `${kids.length} comments`}
+      </p>
+    )}
 
     {kids && <ListComments ids={kids} />}
   </Fragment>
