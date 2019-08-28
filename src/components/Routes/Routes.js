@@ -4,15 +4,15 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { withCard } from '../../hocs'
 
 import { ContainerListItems } from '../../containers'
-import { Info, Item, ModalItem } from '..'
+import { Info, Item, ModalItem, User } from '..'
 
 const about = 'Mini hacker news clone implemented on react.js and redux.js';
-
-const CardInfo = withCard(Info);
 
 const ListItemsPage = ({ match }) => (
   <ContainerListItems type={match.params.type} />
 );
+
+const CardInfo = withCard(Info);
 
 const CardItem = withCard(Item);
 
@@ -22,6 +22,10 @@ const ItemPage = ({ match }) => (
 
 const ModalItemPage = ({ match, history }) => (
   <ModalItem id={match.params.id} history={history} />
+);
+
+const UserPage = ({ match }) => (
+  <User id={match.params.id} />
 );
 
 class ModalSwitch extends Component {
@@ -46,6 +50,7 @@ class ModalSwitch extends Component {
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
           <Route path='/about' render={() => <CardInfo title='About Us' message={about} />} />
           <Route path='/item/:id' component={ItemPage} />
+          <Route path='/user/:id' component={UserPage} />
         </Switch>
         {isModal ? <Route path='/item/:id' component={ModalItemPage} /> : null}
       </Fragment>

@@ -16,6 +16,14 @@ const withItem = Component => {
       dispatch(getItemIfNeeded(firebase, id))
     }
 
+    componentDidUpdate(prevProps) {
+      let { dispatch, firebase, id } = this.props;
+
+      if (id !== prevProps.id) {
+        dispatch(getItemIfNeeded(firebase, id))
+      }
+    }
+
     render() {
       return <Component {...this.props} />
     }

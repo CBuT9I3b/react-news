@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import TimeAgo from 'react-timeago'
 
 import { ListComments } from '..'
@@ -9,7 +10,9 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
 
     {!!(type || by || time) && (
       <p>
-        {type && by && `${type} by ${by} `}
+        {type && by && (
+          <Fragment>{type} by <Link to={`/user/${by}`}>{by}</Link> </Fragment>
+        )}
 
         {time && <TimeAgo date={(time * 1000)} />}
       </p>
