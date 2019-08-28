@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Preloader = () => (
+export const Preloader = () => (
   <div className='preloader-wrapper small active'>
     <div className='spinner-layer spinner-red-only'>
       <div className='circle-clipper left'>
@@ -16,4 +16,15 @@ const Preloader = () => (
   </div>
 );
 
-export default Preloader
+const style = {
+  paddingLeft: '20px'
+};
+
+export const PreloaderAndMessage = ({ message }) => (
+  <div className='valign-wrapper'>
+    <Preloader />
+    <div style={style}>
+      <p>{message}</p>
+    </div>
+  </div>
+);

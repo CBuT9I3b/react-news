@@ -2,12 +2,12 @@ import React, { Fragment } from 'react'
 
 import { withItem } from '../../hocs'
 
-import { Article, Info } from '..'
+import { Article, Info, PreloaderAndMessage } from '..'
 
 const Item = ({ isLoading, isError, item, mini }) => (
   <Fragment>
     {isLoading && (
-      <Info title='Loading' message='Story is loading...' />
+      <PreloaderAndMessage message='Story is loading...' />
     )}
 
     {isError && (

@@ -9,9 +9,10 @@ import { withFirebase } from '../services'
 import { getStoriesIfNeeded, getStoriesMore } from '../actions'
 import { withCard } from '../hocs'
 
-import { Info, ListItems } from '../components'
+import { Info, ListItems, PreloaderAndMessage } from '../components'
 
 const CardInfo = withCard(Info);
+const CardPreloader = withCard(PreloaderAndMessage);
 
 class ContainerListItems extends Component {
   componentDidMount() {
@@ -63,7 +64,7 @@ class ContainerListItems extends Component {
         )}
 
         {isLoading && (
-          <CardInfo title='Loading' message='List of Stories is loading...' />
+          <CardPreloader message='List of Stories is loading...' />
         )}
 
         {!stories && !isLoading && (

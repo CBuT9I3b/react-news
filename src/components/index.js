@@ -1,4 +1,5 @@
 export { default as LinearProgress } from './LinearProgress'
+export * from './Preloader'
 
 export { default as Header } from './Header'
 

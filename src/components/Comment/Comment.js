@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
-import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { ListComments } from '..'
+import { Article, PreloaderAndMessage } from '..'
 
 const style = {
   paddingLeft: '20px',
@@ -14,20 +13,12 @@ const style = {
 const Comment = ({ index, isLoading, item }) => (
   <Fragment>
     {isLoading && index === 0 && (
-      <p>Comments are loading...</p>
+      <PreloaderAndMessage message='Comments are loading...' />
     )}
 
     {item && (
       <div style={style}>
-        <p>
-          {item.type && item.by && `${item.type} by ${item.by} `}
-
-          {item.time && <TimeAgo date={(item.time * 1000)} />}
-        </p>
-
-        {item.text && <p dangerouslySetInnerHTML={{ __html: item.text }} />}
-
-        {item.kids && <ListComments ids={item.kids} />}
+        <Article {...item} />
       </div>
     )}
   </Fragment>
