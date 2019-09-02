@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 import { ListComments } from '..'
 
-const Article = ({ title, type, by, time, text, url, score, kids }) => (
+const Article = ({ title, type, by, time, text, url, score, kids, deleted }) => (
   <Fragment>
     {title && <h6><b>{title}</b></h6>}
 
@@ -17,6 +17,8 @@ const Article = ({ title, type, by, time, text, url, score, kids }) => (
         {time && <TimeAgo date={(time * 1000)} />}
       </p>
     )}
+
+    {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
 
     {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 

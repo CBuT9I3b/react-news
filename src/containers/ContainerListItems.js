@@ -64,7 +64,7 @@ class ContainerListItems extends Component {
         )}
 
         {isLoading && (
-          <CardPreloader message='List of Stories is loading...' />
+          <CardPreloader message='Stories are loading...' />
         )}
 
         {!stories && !isLoading && (
