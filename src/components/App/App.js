@@ -8,9 +8,7 @@ const App = () => (
     <ContainerProgress />
     <Header />
     <main className='container'>
-      <div className='row'>
-        <Routes />
-      </div>
+      <Routes />
     </main>
   </Fragment>
 );

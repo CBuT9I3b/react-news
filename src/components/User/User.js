@@ -16,9 +16,9 @@ const User = ({ isLoading, isError, user }) => (
 
     {user && (
       <Fragment>
-        {user.id && <h6>Username: <b>{user.id}</b></h6>}
+        {user.id && <h6>User: <b>{user.id}</b></h6>}
 
-        {user.created && <p>Date of Creation: {new Date(user.created * 1000).toLocaleString()}</p>}
+        {user.created && <p>Created: {new Date(user.created * 1000).toLocaleDateString()}</p>}
 
         {user.karma && <p>Karma: {user.karma}</p>}
 

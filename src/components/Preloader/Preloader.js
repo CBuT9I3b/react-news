@@ -17,7 +17,7 @@ export const Preloader = () => (
 );
 
 const style = {
-  paddingLeft: '20px'
+  paddingLeft: '24px'
 };
 
 export const PreloaderAndMessage = ({ message }) => (

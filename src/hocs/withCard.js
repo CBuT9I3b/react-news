@@ -9,4 +9,3 @@ const withCard = Component => {
 };
 
 export default withCard
-

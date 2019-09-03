@@ -4,21 +4,23 @@ import TimeAgo from 'react-timeago'
 
 import { ListComments } from '..'
 
-const Article = ({ title, type, by, time, text, url, score, kids, deleted }) => (
+const Article = ({ title, by, time, text, url, score, kids, deleted }) => (
   <Fragment>
     {title && <h6><b>{title}</b></h6>}
 
-    {!!(type || by || time) && (
+    {!!(score || by || time || kids) && (
       <p>
-        {type && by && (
-          <Fragment>{type} by <Link to={`/user/${by}`}>{by}</Link> </Fragment>
+        {score && `${score} points `}
+
+        {by && (
+          <Fragment>by <Link to={`/user/${by}`}>{by}</Link> </Fragment>
         )}
 
         {time && <TimeAgo date={(time * 1000)} />}
+
+        {kids && ` ${kids.length} comments`}
       </p>
     )}
-
-    {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
 
     {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 
@@ -28,13 +30,7 @@ const Article = ({ title, type, by, time, text, url, score, kids, deleted }) => 
       </a></p>
     )}
 
-    {!!(score || kids) && (
-      <p>
-        {score && `${score} points `}
-
-        {kids && `${kids.length} comments`}
-      </p>
-    )}
+    {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
 
     {kids && <ListComments ids={kids} />}
   </Fragment>

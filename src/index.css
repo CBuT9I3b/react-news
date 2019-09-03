@@ -2,3 +2,7 @@ body {
   background-color: #eceff1;
   overflow-y: scroll;
 }
+
+pre {
+  overflow-x: auto;
+}
