@@ -1,8 +1,8 @@
 import React from 'react'
 
 const style = {
+  margin: '0',
   position: 'fixed',
-  margin: '0 0 0 0',
   zIndex: '1004'
 };
 
