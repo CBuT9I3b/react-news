@@ -1,19 +1,8 @@
 import React, { Component, Fragment } from 'react'
 
+import './ModalItem.sass'
+
 import { Item } from '..'
-
-const styleOverlay = {
-  zIndex: '1002',
-  display: 'block',
-  opacity: '0.5'
-};
-
-const styleModal = {
-  zIndex: '1003',
-  display: 'block',
-  opacity: '1',
-  top: '10%'
-};
 
 class ModalItem extends Component {
   componentDidMount() {
@@ -35,8 +24,8 @@ class ModalItem extends Component {
 
     return (
       <Fragment>
-        <div onClick={this.onBack} style={styleOverlay} className='modal-overlay' />
-        <div style={styleModal} className='modal'>
+        <div onClick={this.onBack} className='modal-overlay my--modal--overlay' />
+        <div className='modal my--modal'>
           <div className='modal-content'>
             <Item id={id} />
           </div>

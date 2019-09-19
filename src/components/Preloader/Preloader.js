@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Preloader.sass'
+
 export const Preloader = () => (
   <div className='preloader-wrapper small active'>
     <div className='spinner-layer spinner-red-only'>
@@ -16,14 +18,10 @@ export const Preloader = () => (
   </div>
 );
 
-const style = {
-  paddingLeft: '24px'
-};
-
 export const PreloaderAndMessage = ({ message }) => (
   <div className='valign-wrapper'>
     <Preloader />
-    <div style={style}>
+    <div className='preloader--message'>
       <p>{message}</p>
     </div>
   </div>

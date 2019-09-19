@@ -7,7 +7,7 @@ const App = () => (
   <Fragment>
     <ContainerProgress />
     <Header />
-    <main className='container'>
+    <main>
       <Routes />
     </main>
   </Fragment>

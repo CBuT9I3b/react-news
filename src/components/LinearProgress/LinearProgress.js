@@ -1,13 +1,9 @@
 import React from 'react'
 
-const style = {
-  margin: '0',
-  position: 'fixed',
-  zIndex: '1004'
-};
+import './LinearProgress.sass'
 
 const LinearProgress = () => (
-  <div style={style} className='progress red lighten-4'>
+  <div className='progress red lighten-4 linear--progress'>
     <div className='indeterminate red' />
   </div>
 );
