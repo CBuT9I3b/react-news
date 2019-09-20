@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import './ModalItem.sass'
 
@@ -23,7 +23,7 @@ class ModalItem extends Component {
     let { id } = this.props;
 
     return (
-      <Fragment>
+      <>
         <div onClick={this.onBack} className='modal-overlay my--modal--overlay' />
         <div className='modal my--modal'>
           <div className='modal-content'>
@@ -33,7 +33,7 @@ class ModalItem extends Component {
             <button onClick={this.onBack} className='btn-flat waves-effect waves-red'>Close</button>
           </div>
         </div>
-      </Fragment>
+      </>
     )
   }
 }

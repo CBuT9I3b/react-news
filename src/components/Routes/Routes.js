@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { withCard } from '../../hocs'
@@ -44,7 +44,7 @@ class ModalSwitch extends Component {
     let isModal = !!(location.state && location.state.modal && this.prevLocation !== location);
 
     return (
-      <Fragment>
+      <>
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
@@ -53,7 +53,7 @@ class ModalSwitch extends Component {
           <Route path='/user/:id' component={UserPage} />
         </Switch>
         {isModal ? <Route path='/item/:id' component={ModalItemPage} /> : null}
-      </Fragment>
+      </>
     )
   }
 }

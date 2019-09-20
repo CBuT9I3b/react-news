@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import TimeAgo from 'react-timeago'
 
 const Info = ({ title, message, time, by, score, descendants }) => (
-  <Fragment>
+  <>
     {title && <h6><b>{title}</b></h6>}
 
     {!!(time || by || score || descendants) && (
       <p>
-        {score && `${score} points `}
+        {score !== 0 && `${score} points `}
 
         {by && `by ${by} `}
 
@@ -18,7 +18,7 @@ const Info = ({ title, message, time, by, score, descendants }) => (
     )}
 
     {message && <p>{message}</p>}
-  </Fragment>
+  </>
 );
 
 export default Info

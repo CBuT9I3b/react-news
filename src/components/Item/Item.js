@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React  from 'react'
 
 import { withItem } from '../../hocs'
 
 import { Article, Info, PreloaderAndMessage } from '..'
 
 const Item = ({ isLoading, isError, item, mini }) => (
-  <Fragment>
+  <>
     {isLoading && (
       <PreloaderAndMessage message='Story is loading...' />
     )}
@@ -25,7 +25,7 @@ const Item = ({ isLoading, isError, item, mini }) => (
     {!isLoading && !isError && !item && (
       <Info title='Error' message='Oops...' />
     )}
-  </Fragment>
+  </>
 );
 
 export default withItem(Item)

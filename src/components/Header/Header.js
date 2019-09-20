@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
@@ -7,19 +7,19 @@ const NavLinkWithStyle = ({ to, title }) => (
 );
 
 const BlockLinksNews = () => (
-  <Fragment>
+  <>
     <li><NavLinkWithStyle to='/new' title='New' /></li>
     <li><NavLinkWithStyle to='/top' title='Top' /></li>
     <li><NavLinkWithStyle to='/best' title='Best' /></li>
-  </Fragment>
+  </>
 );
 
 const BlockLinksOther = () => (
-  <Fragment>
+  <>
     <li><NavLinkWithStyle to='/ask' title='Ask' /></li>
     <li><NavLinkWithStyle to='/show' title='Show' /></li>
     <li><NavLinkWithStyle to='/job' title='Job' /></li>
-  </Fragment>
+  </>
 );
 
 const Header = () => (

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -56,7 +56,7 @@ class ContainerListItems extends Component {
     let { isLoading, isError, stories, numberPerPage } = this.props;
 
     return (
-      <Fragment>
+      <>
         {stories && (
           <ListItems
             ids={stories.slice(0, numberPerPage)}
@@ -81,7 +81,7 @@ class ContainerListItems extends Component {
             className='waves-effect waves-light btn'
           >More</button>
         )}
-      </Fragment>
+      </>
     )
   }
 }
