@@ -4,11 +4,11 @@ import TimeAgo from 'react-timeago'
 
 import { ListComments } from '..'
 
-const Article = ({ title, by, time, text, url, score, kids, deleted }) => (
+const Article = ({ title, by, time, text, url, score, kids, deleted, descendants }) => (
   <Fragment>
     {title && <h6><b>{title}</b></h6>}
 
-    {!!(score || by || time || kids) && (
+    {!!(score || by || time || descendants) && (
       <p>
         {score && `${score} points `}
 
@@ -18,7 +18,7 @@ const Article = ({ title, by, time, text, url, score, kids, deleted }) => (
 
         {time && <TimeAgo date={(time * 1000)} />}
 
-        {kids && ` ${kids.length} comments`}
+        {descendants !== 0 && ` ${descendants} comments`}
       </p>
     )}
 
