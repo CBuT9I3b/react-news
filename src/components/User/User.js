@@ -1,7 +1,6 @@
 import React from 'react'
-import { compose } from 'redux'
 
-import { withCard, withUser } from '../../hocs'
+import { withUser } from '../../hocs'
 import { Info, PreloaderAndMessage } from '..'
 
 const User = ({ isLoading, isError, user }) => (
@@ -15,7 +14,7 @@ const User = ({ isLoading, isError, user }) => (
     )}
 
     {user && (
-      <>
+      <article>
         {user.id && <h6>User: <b>{user.id}</b></h6>}
 
         {user.created && <p>Created: {new Date(user.created * 1000).toLocaleDateString()}</p>}
@@ -25,7 +24,7 @@ const User = ({ isLoading, isError, user }) => (
         {user.about && <p dangerouslySetInnerHTML={{ __html: user.about }} />}
 
         {user.submitted && <p>Submitted: {user.submitted.length}</p>}
-      </>
+      </article>
     )}
 
     {!isLoading && !isError && !user && (
@@ -34,7 +33,4 @@ const User = ({ isLoading, isError, user }) => (
   </>
 );
 
-export default compose(
-  withCard,
-  withUser
-)(User)
+export default withUser(User)

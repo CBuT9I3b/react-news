@@ -6,9 +6,13 @@ import { Header, Routes } from '..'
 const App = () => (
   <>
     <ContainerProgress />
-    <Header />
+    <header>
+      <Header />
+    </header>
     <main>
-      <Routes />
+      <section className='card-panel'>
+        <Routes />
+      </section>
     </main>
   </>
 );

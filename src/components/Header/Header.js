@@ -23,7 +23,7 @@ const BlockLinksOther = () => (
 );
 
 const Header = () => (
-  <header>
+  <>
     <div className='navbar-fixed'>
       <nav>
         <div className='nav-wrapper blue-grey'>
@@ -52,7 +52,7 @@ const Header = () => (
       <li className='divider' />
       <li><NavLinkWithStyle to='/about' title='About Us' /></li>
     </ul>
-  </header>
+  </>
 );
 
 export default Header

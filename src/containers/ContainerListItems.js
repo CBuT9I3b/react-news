@@ -7,12 +7,8 @@ import { INITIAL_STATE_STORIES } from '../constants'
 
 import { withFirebase } from '../services'
 import { getStoriesIfNeeded, getStoriesMore } from '../actions'
-import { withCard } from '../hocs'
 
 import { Info, ListItems, PreloaderAndMessage } from '../components'
-
-const CardInfo = withCard(Info);
-const CardPreloader = withCard(PreloaderAndMessage);
 
 class ContainerListItems extends Component {
   componentDidMount() {
@@ -64,15 +60,15 @@ class ContainerListItems extends Component {
         )}
 
         {isLoading && (
-          <CardPreloader message='Stories are loading...' />
+          <PreloaderAndMessage message='Stories are loading...' />
         )}
 
         {!stories && !isLoading && (
-          <CardInfo title='Error' message='No Stories' />
+          <Info title='Error' message='No Stories' />
         )}
 
         {isError && (
-          <CardInfo title='Error' message={isError} />
+          <Info title='Error' message={isError} />
         )}
 
         {stories && !isLoading && (

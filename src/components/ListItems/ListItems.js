@@ -1,11 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-import { withCard } from '../../hocs'
-
 import { Item } from '..'
-
-const CardItem = withCard(Item);
 
 const MemoItem = memo(props => (
   <Link
@@ -15,7 +11,7 @@ const MemoItem = memo(props => (
     }}
     className='black-text'
   >
-    <CardItem mini id={props.id} />
+    <Item mini id={props.id} />
   </Link>
 ));
 
