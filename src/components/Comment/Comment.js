@@ -1,7 +1,5 @@
 import React from 'react'
 
-import './Comment.sass'
-
 import { withItem } from '../../hocs'
 
 import { Article, PreloaderAndMessage } from '..'

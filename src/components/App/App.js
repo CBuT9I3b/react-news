@@ -10,7 +10,7 @@ const App = () => (
       <Header />
     </header>
     <main>
-      <section className='card-panel'>
+      <section className='my--timeline'>
         <Routes />
       </section>
     </main>

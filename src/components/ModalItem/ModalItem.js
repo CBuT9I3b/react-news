@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
-import './ModalItem.sass'
-
 import { Item } from '..'
 
 class ModalItem extends Component {
   componentDidMount() {
-    document.body.style.overflowY = 'hidden'
+    document.body.style.overflowY = 'hidden';
+    document.body.style.paddingRight = '15px'
   }
 
   componentWillUnmount() {
-    document.body.style.overflowY = 'scroll'
+    document.body.style.overflowY = 'scroll';
+    document.body.style.paddingRight = '0px'
   }
 
   onBack = event => {
@@ -24,8 +24,8 @@ class ModalItem extends Component {
 
     return (
       <>
-        <div onClick={this.onBack} className='modal-overlay my--modal--overlay' />
-        <div className='modal my--modal'>
+        <div onClick={this.onBack} className='my--modal--overlay' />
+        <div className='my--modal'>
           <div className='modal-content'>
             <Item id={id} />
           </div>

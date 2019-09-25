@@ -74,7 +74,7 @@ class ContainerListItems extends Component {
         {stories && !isLoading && (
           <button
             onClick={this.onMore}
-            className='waves-effect waves-light btn'
+            className='btn blue darken-3 waves-effect waves-light'
           >More</button>
         )}
       </>

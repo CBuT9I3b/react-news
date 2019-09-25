@@ -1,7 +1,5 @@
 import React from 'react'
 
-import './Preloader.sass'
-
 export const Preloader = () => (
   <div className='preloader-wrapper small active'>
     <div className='spinner-layer spinner-red-only'>

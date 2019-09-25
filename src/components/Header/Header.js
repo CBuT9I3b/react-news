@@ -3,7 +3,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const NavLinkWithStyle = ({ to, title }) => (
-  <NavLink to={to} className='white-text' activeClassName='blue'>{title}</NavLink>
+  <NavLink to={to} className='white-text' activeClassName='blue darken-3'>{title}</NavLink>
 );
 
 const BlockLinksNews = () => (
@@ -26,7 +26,7 @@ const Header = () => (
   <>
     <div className='navbar-fixed'>
       <nav>
-        <div className='nav-wrapper blue-grey'>
+        <div className='nav-wrapper blue-grey darken-3'>
           <a href='#!' className='right sidenav-trigger' data-target='mobile-nav'>
             <i className='material-icons'>menu</i>
           </a>
@@ -41,7 +41,7 @@ const Header = () => (
       </nav>
     </div>
 
-    <ul className='sidenav blue-grey' id='mobile-nav'>
+    <ul className='sidenav blue-grey darken-3' id='mobile-nav'>
       <li><a href='#!' className='sidenav-close white-text'>
         <i className='material-icons white-text'>arrow_back</i>React HNews
       </a></li>
