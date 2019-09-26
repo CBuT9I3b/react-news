@@ -5,3 +5,16 @@
 
   pre
     overflow-x: auto
+
+@media #{$small-and-down}
+  .comment
+    padding-left: 5px
+    border-left: 0
+
+    a
+      display: inline-block
+      max-width: 200px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+      vertical-align: top
