@@ -23,7 +23,12 @@ module.exports = {
       },
       {
         test: /\.(sass|scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development'
+          }
+        }, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

@@ -23,7 +23,15 @@ const UserPage = ({ match }) => (
 );
 
 class ModalSwitch extends Component {
-  prevLocation = this.props.location;
+  constructor(props) {
+    super(props);
+    this.prevLocation = this.props.location;
+    this.isMediumAndDownScreen = window.innerWidth <= 992
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onListenerResize)
+  }
 
   componentDidUpdate() {
     let { history, location } = this.props;
@@ -33,9 +41,17 @@ class ModalSwitch extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onListenerResize)
+  }
+
+  onListenerResize = () => this.isMediumAndDownScreen = window.innerWidth <= 992;
+
   render() {
     let { location } = this.props;
-    let isModal = !!(location.state && location.state.modal && this.prevLocation !== location);
+    let isModal = !!(
+      !this.isMediumAndDownScreen && location.state && location.state.modal && this.prevLocation !== location
+    );
 
     return (
       <>

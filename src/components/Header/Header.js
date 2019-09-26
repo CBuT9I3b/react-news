@@ -25,8 +25,8 @@ const BlockLinksOther = () => (
 const Header = () => (
   <>
     <div className='navbar-fixed'>
-      <nav>
-        <div className='nav-wrapper blue-grey darken-3'>
+      <nav className='blue-grey darken-3'>
+        <div className='nav-wrapper container'>
           <a href='#!' className='right sidenav-trigger' data-target='mobile-nav'>
             <i className='material-icons'>menu</i>
           </a>
