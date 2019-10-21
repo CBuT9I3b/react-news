@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import { ContainerListItems } from '../../containers'
-import { Info, Item, ModalItem, User } from '..'
-
-const about = 'Mini hacker news clone implemented on react.js and redux.js';
+import { Item, ModalItem, User, AboutUs } from '..'
 
 const ListItemsPage = ({ match }) => (
   <ContainerListItems type={match.params.type} />
@@ -58,7 +56,7 @@ class ModalSwitch extends Component {
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
           <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
-          <Route path='/about' render={() => <Info title='About Us' message={about} />} />
+          <Route path='/about' component={AboutUs} />
           <Route path='/item/:id' component={ItemPage} />
           <Route path='/user/:id' component={UserPage} />
         </Switch>
