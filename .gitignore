@@ -2,3 +2,4 @@
 /build
 /.firebase
 /.idea
+*.log
