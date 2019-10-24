@@ -9,15 +9,17 @@ import { PreloaderAndMessage, ServiceMessage } from '..'
 const ListItemContent = ({ id, title, time, by, score, descendants }) => (
   <>
     {title && (
-      <Link
-        to={{
-          pathname: `/item/${id}`,
-          state: { modal: true }
-        }}
-        className='hn--link'
-      >
-        <h6><b>{title}</b></h6>
-      </Link>
+      <h6>
+        <Link
+          to={{
+            pathname: `/item/${id}`,
+            state: { modal: true }
+          }}
+          className='hn--link'
+        >
+          <b>{title}</b>
+        </Link>
+      </h6>
     )}
 
     {!!(score || by || time || descendants) && (
