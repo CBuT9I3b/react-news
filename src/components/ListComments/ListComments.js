@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Comment } from '..'
+import Comment from './Comment'
 
 const ListComments = ({ ids }) => (
   <section>

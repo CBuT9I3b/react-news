@@ -1,14 +1,24 @@
-import React  from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { ServiceMessage, PreloaderAndMessage, ListComments } from '..'
+import { PreloaderAndMessage, ServiceMessage } from '..'
 
-const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descendants }) => (
+const ListItemContent = ({ id, title, time, by, score, descendants }) => (
   <>
-    {title && <h6><b>{title}</b></h6>}
+    {title && (
+      <Link
+        to={{
+          pathname: `/item/${id}`,
+          state: { modal: true }
+        }}
+        className='hn--link'
+      >
+        <h6><b>{title}</b></h6>
+      </Link>
+    )}
 
     {!!(score || by || time || descendants) && (
       <p>
@@ -23,22 +33,10 @@ const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descend
         {!!descendants && ` ${descendants} comments`}
       </p>
     )}
-
-    {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
-
-    {url && (
-      <p><a href={url} target='_blank' rel='noreferrer noopener'>
-        {url.split('/')[2]}
-      </a></p>
-    )}
-
-    {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
-
-    {kids && <ListComments ids={kids} />}
   </>
 );
 
-const Item = ({ isLoading, isError, item }) => (
+const ListItem = ({ isLoading, isError, item }) => (
   <article>
     {isLoading && (
       <PreloaderAndMessage message='Story is loading...' />
@@ -49,7 +47,7 @@ const Item = ({ isLoading, isError, item }) => (
     )}
 
     {item && (
-      <ItemContent {...item} />
+      <ListItemContent {...item} />
     )}
 
     {!isLoading && !isError && !item && (
@@ -58,4 +56,4 @@ const Item = ({ isLoading, isError, item }) => (
   </article>
 );
 
-export default withItem(Item)
+export default withItem(ListItem)

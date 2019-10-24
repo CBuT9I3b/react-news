@@ -1,10 +1,12 @@
 import React from 'react'
 
+import { ServiceMessage } from '..'
+
 const AboutUs = () => (
-  <article>
-    <h6><b>About Us</b></h6>
-    <p>Mini hacker news clone implemented on react.js and redux.js</p>
-  </article>
+  <ServiceMessage
+    title='About Us'
+    message='Mini hacker news clone implemented on react.js and redux.js'
+  />
 );
 
 export default AboutUs

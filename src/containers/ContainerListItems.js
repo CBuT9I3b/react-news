@@ -8,7 +8,7 @@ import { INITIAL_STATE_STORIES } from '../constants'
 import { withFirebase } from '../services'
 import { getStoriesIfNeeded, getStoriesMore } from '../actions'
 
-import { Info, ListItems, PreloaderAndMessage } from '../components'
+import { ServiceMessage, ListItems, PreloaderAndMessage } from '../components'
 
 class ContainerListItems extends Component {
   componentDidMount() {
@@ -64,11 +64,11 @@ class ContainerListItems extends Component {
         )}
 
         {!stories && !isLoading && (
-          <Info title='Error' message='No Stories' />
+          <ServiceMessage title='Error' message='No Stories' />
         )}
 
         {isError && (
-          <Info title='Error' message={isError} />
+          <ServiceMessage title='Error' message={isError} />
         )}
 
         {stories && !isLoading && (

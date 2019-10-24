@@ -1,36 +1,40 @@
 import React from 'react'
 
 import { withUser } from '../../hocs'
-import { Info, PreloaderAndMessage } from '..'
+import { ServiceMessage, PreloaderAndMessage } from '..'
+
+const UserContent = ({ id, created, karma, about, submitted }) => (
+  <>
+    {id && <h6>User: <b>{id}</b></h6>}
+
+    {created && <p>Created: {new Date(created * 1000).toLocaleDateString()}</p>}
+
+    {karma && <p>Karma: {karma}</p>}
+
+    {about && <p dangerouslySetInnerHTML={{ __html: about }} />}
+
+    {submitted && <p>Submitted: {submitted.length}</p>}
+  </>
+);
 
 const User = ({ isLoading, isError, user }) => (
-  <>
+  <article>
     {isLoading && (
       <PreloaderAndMessage message='User information is loading...' />
     )}
 
     {isError && (
-      <Info title='Error' message={isError} />
+      <ServiceMessage title='Error' message={isError} />
     )}
 
     {user && (
-      <article>
-        {user.id && <h6>User: <b>{user.id}</b></h6>}
-
-        {user.created && <p>Created: {new Date(user.created * 1000).toLocaleDateString()}</p>}
-
-        {user.karma && <p>Karma: {user.karma}</p>}
-
-        {user.about && <p dangerouslySetInnerHTML={{ __html: user.about }} />}
-
-        {user.submitted && <p>Submitted: {user.submitted.length}</p>}
-      </article>
+      <UserContent {...user} />
     )}
 
     {!isLoading && !isError && !user && (
-      <Info title='Error' message='Oops...' />
+      <ServiceMessage title='Error' message='Oops...' />
     )}
-  </>
+  </article>
 );
 
 export default withUser(User)

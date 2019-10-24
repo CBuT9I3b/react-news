@@ -1,22 +1,9 @@
-import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 
-import { Item } from '..'
-
-const MemoItem = memo(props => (
-  <Link
-    to={{
-      pathname: `/item/${props.id}`,
-      state: { modal: true }
-    }}
-    className='black-text'
-  >
-    <Item mini id={props.id} />
-  </Link>
-));
+import ListItem from './ListItem'
 
 const ListItems = ({ ids }) => (
-  ids.map(id => <MemoItem key={id} id={id} />)
+  ids.map(id => <ListItem key={id} id={id} />)
 );
 
 export default ListItems
