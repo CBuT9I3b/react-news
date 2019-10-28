@@ -3,19 +3,24 @@ import React from 'react'
 import { withUser } from '../../hocs'
 import { ServiceMessage, PreloaderAndMessage } from '..'
 
-const UserContent = ({ id, created, karma, about, submitted }) => (
-  <>
-    {id && <h6>User: <b>{id}</b></h6>}
+import { setTitle } from '../../utils'
 
-    {created && <p>Created: {new Date(created * 1000).toLocaleDateString()}</p>}
+const UserContent = ({ id, created, karma, about, submitted }) => {
+  setTitle(id);
+  return (
+    <>
+      {id && <h6>User: <b>{id}</b></h6>}
 
-    {karma && <p>Karma: {karma}</p>}
+      {created && <p>Created: {new Date(created * 1000).toLocaleDateString()}</p>}
 
-    {about && <p dangerouslySetInnerHTML={{ __html: about }} />}
+      {karma && <p>Karma: {karma}</p>}
 
-    {submitted && <p>Submitted: {submitted.length}</p>}
-  </>
-);
+      {about && <p dangerouslySetInnerHTML={{ __html: about }} />}
+
+      {submitted && <p>Submitted: {submitted.length}</p>}
+    </>
+  )
+};
 
 const User = ({ isLoading, isError, user }) => (
   <article>

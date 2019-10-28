@@ -6,37 +6,42 @@ import { withItem } from '../../hocs'
 
 import { ServiceMessage, PreloaderAndMessage, ListComments } from '..'
 
-const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descendants }) => (
-  <>
-    {title && <h6><b>{title}</b></h6>}
+import { setTitle } from '../../utils'
 
-    {!!(score || by || time || descendants) && (
-      <p>
-        {!!score && `${score} points `}
+const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descendants }) => {
+  setTitle(title);
+  return (
+    <>
+      {title && <h6><b>{title}</b></h6>}
 
-        {by && (
-          <>by <Link to={`/user/${by}`} className='hn--link'>{by}</Link> </>
-        )}
+      {!!(score || by || time || descendants) && (
+        <p>
+          {!!score && `${score} points `}
 
-        {time && <TimeAgo date={(time * 1000)} />}
+          {by && (
+            <>by <Link to={`/user/${by}`} className='hn--link'>{by}</Link> </>
+          )}
 
-        {!!descendants && ` ${descendants} comments`}
-      </p>
-    )}
+          {time && <TimeAgo date={(time * 1000)} />}
 
-    {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
+          {!!descendants && ` ${descendants} comments`}
+        </p>
+      )}
 
-    {url && (
-      <p><a href={url} target='_blank' rel='noreferrer noopener'>
-        {url.split('/')[2]}
-      </a></p>
-    )}
+      {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 
-    {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
+      {url && (
+        <p><a href={url} target='_blank' rel='noreferrer noopener'>
+          {url.split('/')[2]}
+        </a></p>
+      )}
 
-    {kids && <ListComments ids={kids} />}
-  </>
-);
+      {deleted && <p className='grey-text'><i>Item is deleted</i></p>}
+
+      {kids && <ListComments ids={kids} />}
+    </>
+  )
+};
 
 const Item = ({ isLoading, isError, item }) => (
   <article>

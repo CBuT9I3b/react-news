@@ -27,7 +27,7 @@ const CommentContent = ({ by, time, text, kids, deleted }) => (
 );
 
 const Comment = ({ index, isLoading, item }) => (
-  <>
+  <li>
     {isLoading && index === 0 && (
       <PreloaderAndMessage message='Comments are loading...' />
     )}
@@ -37,7 +37,7 @@ const Comment = ({ index, isLoading, item }) => (
         <CommentContent {...item} />
       </div>
     )}
-  </>
+  </li>
 );
 
 export default withItem(Comment)

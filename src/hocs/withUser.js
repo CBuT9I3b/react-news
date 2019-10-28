@@ -16,16 +16,16 @@ const withUser = Component => {
       dispatch(getUserIfNeeded(firebase, id))
     }
 
-    render() {
-      return <Component {...this.props} />
-    }
-
     componentDidUpdate(prevProps) {
       let { dispatch, firebase, id } = this.props;
 
       if (id !== prevProps.id) {
         dispatch(getUserIfNeeded(firebase, id))
       }
+    }
+
+    render() {
+      return <Component {...this.props} />
     }
   }
 

@@ -10,19 +10,24 @@ import { getStoriesIfNeeded, getStoriesMore } from '../actions'
 
 import { ServiceMessage, ListItems, PreloaderAndMessage } from '../components'
 
+import { setTitle, upperCaseFirstSymbol } from '../utils'
+
 class ContainerListItems extends Component {
   componentDidMount() {
     let { dispatch, firebase, type } = this.props;
 
-    window.addEventListener('scroll', this.handleScroll);
+    setTitle(upperCaseFirstSymbol(type));
 
-    dispatch(getStoriesIfNeeded(firebase, type))
+    dispatch(getStoriesIfNeeded(firebase, type));
+
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   componentDidUpdate(prevProps) {
     let { dispatch, firebase, type } = this.props;
 
     if (type !== prevProps.type) {
+      setTitle(upperCaseFirstSymbol(type));
       dispatch(getStoriesIfNeeded(firebase, type))
     }
   }

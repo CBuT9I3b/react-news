@@ -16,3 +16,5 @@ export const INITIAL_STATE_USER = {
   isError: false,
   user: null
 };
+
+export const SITE_TITLE = 'React HNews';

@@ -3,9 +3,9 @@ import React from 'react'
 import Comment from './Comment'
 
 const ListComments = ({ ids }) => (
-  <section>
+  <ul className='list--items'>
     {ids.map((id, index) => id && <Comment key={id} id={id} index={index} />)}
-  </section>
+  </ul>
 );
 
 export default ListComments

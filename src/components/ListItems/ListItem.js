@@ -39,7 +39,7 @@ const ListItemContent = ({ id, title, time, by, score, descendants }) => (
 );
 
 const ListItem = ({ isLoading, isError, item }) => (
-  <article>
+  <li>
     {isError && (
       <ServiceMessage title='Error' message={isError} />
     )}
@@ -51,7 +51,7 @@ const ListItem = ({ isLoading, isError, item }) => (
     {!isLoading && !isError && !item && (
       <ServiceMessage title='Error' message='Oops...' />
     )}
-  </article>
+  </li>
 );
 
 export default withItem(ListItem)
