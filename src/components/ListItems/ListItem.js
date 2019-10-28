@@ -40,10 +40,6 @@ const ListItemContent = ({ id, title, time, by, score, descendants }) => (
 
 const ListItem = ({ isLoading, isError, item }) => (
   <article>
-    {isLoading && (
-      <PreloaderAndMessage message='Story is loading...' />
-    )}
-
     {isError && (
       <ServiceMessage title='Error' message={isError} />
     )}

@@ -94,9 +94,9 @@ ContainerListItems.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  let { storiesCache } = state;
+  let { storiesCache, loading: isLoading } = state;
   let { type } = ownProps;
-  let { isLoading, isError, stories, numberPerPage } = storiesCache[type] || INITIAL_STATE_STORIES;
+  let { isError, stories, numberPerPage } = storiesCache[type] || INITIAL_STATE_STORIES;
   return { isLoading, isError, stories, numberPerPage }
 };
 
