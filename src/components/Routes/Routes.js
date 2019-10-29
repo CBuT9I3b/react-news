@@ -4,22 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { ContainerListItems } from '../../containers'
 import { Item, ModalItem, User, AboutUs } from '..'
 
-const ListItemsPage = ({ match }) => (
-  <ContainerListItems type={match.params.type} />
-);
-
-const ItemPage = ({ match }) => (
-  <Item id={match.params.id} />
-);
-
-const ModalItemPage = ({ match, history }) => (
-  <ModalItem id={match.params.id} history={history} />
-);
-
-const UserPage = ({ match }) => (
-  <User id={match.params.id} />
-);
-
 class ModalSwitch extends Component {
   constructor(props) {
     super(props);
@@ -55,12 +39,16 @@ class ModalSwitch extends Component {
       <>
         <Switch location={isModal ? this.prevLocation : location}>
           <Route exact path='/' render={() => <Redirect from='/' to='/new' />} />
-          <Route path='/:type(new|top|best|ask|show|job)' component={ListItemsPage} />
+          <Route path='/:type(new|top|best|ask|show|job)' render={({ match }) => (
+            <ContainerListItems type={match.params.type} />
+          )} />
           <Route path='/about' component={AboutUs} />
-          <Route path='/item/:id' component={ItemPage} />
-          <Route path='/user/:id' component={UserPage} />
+          <Route path='/item/:id' render={({ match }) => <Item id={match.params.id} />} />
+          <Route path='/user/:id' render={({ match }) => <User id={match.params.id} />} />
         </Switch>
-        {isModal ? <Route path='/item/:id' component={ModalItemPage} /> : null}
+        {isModal ? <Route path='/item/:id' render={({ match, history }) => (
+          <ModalItem id={match.params.id} history={history} prevLocation={this.prevLocation} />
+        )} /> : null}
       </>
     )
   }

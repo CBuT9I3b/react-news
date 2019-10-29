@@ -31,7 +31,7 @@ const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descend
       {text && <p dangerouslySetInnerHTML={{ __html: text }} />}
 
       {url && (
-        <p><a href={url} target='_blank' rel='noreferrer noopener'>
+        <p><a href={url} target='_blank' rel='noreferrer noopener' className='hn--link'>
           {url.split('/')[2]}
         </a></p>
       )}

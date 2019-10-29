@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 
 import { Item } from '..'
 
-const scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+import { scrollWidth } from '../../utils'
 
 class ModalItem extends Component {
+  constructor(props) {
+    super(props);
+    this.prevTitle = document.title
+  }
+
   componentDidMount() {
     document.body.style.overflowY = 'hidden';
     document.querySelector('nav').style.paddingRight = `${scrollWidth}px`;
@@ -12,15 +17,16 @@ class ModalItem extends Component {
   }
 
   componentWillUnmount() {
+    document.title = this.prevTitle;
     document.body.style.overflowY = 'scroll';
     document.querySelector('nav').style.paddingRight = '0px';
     document.querySelector('main').style.paddingRight = '0px'
   }
 
   onBack = event => {
-    let { history } = this.props;
+    let { history, prevLocation } = this.props;
     event.stopPropagation();
-    history.goBack()
+    history.replace(prevLocation)
   };
 
   render() {
