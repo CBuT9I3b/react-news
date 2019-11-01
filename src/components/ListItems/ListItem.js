@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { PreloaderAndMessage, ServiceMessage } from '..'
+import { ServiceMessage } from '..'
 
 const ListItemContent = ({ id, title, time, by, score, descendants }) => (
   <>

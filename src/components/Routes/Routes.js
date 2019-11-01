@@ -8,7 +8,7 @@ class ModalSwitch extends Component {
   constructor(props) {
     super(props);
     this.prevLocation = this.props.location;
-    this.isMediumAndDownScreen = window.innerWidth <= 992
+    this.isMediumAndDownScreen = window.innerWidth >= 993
   }
 
   componentDidMount() {
@@ -16,9 +16,9 @@ class ModalSwitch extends Component {
   }
 
   componentDidUpdate() {
-    let { history, location } = this.props;
+    let { location } = this.props;
 
-    if (history.action !== 'POP' && (!location.state || !location.state.modal)) {
+    if (!location.state || !location.state.modal) {
       this.prevLocation = location
     }
   }
@@ -27,12 +27,15 @@ class ModalSwitch extends Component {
     window.removeEventListener('resize', this.onListenerResize)
   }
 
-  onListenerResize = () => this.isMediumAndDownScreen = window.innerWidth <= 992;
+  onListenerResize = () => this.isMediumAndDownScreen = window.innerWidth >= 993;
 
   render() {
-    let { location } = this.props;
+    let { location, history } = this.props;
     let isModal = !!(
-      !this.isMediumAndDownScreen && location.state && location.state.modal && this.prevLocation !== location
+      this.isMediumAndDownScreen &&
+      history.action !== 'POP' &&
+      location.state && location.state.modal &&
+      this.prevLocation !== location
     );
 
     return (
