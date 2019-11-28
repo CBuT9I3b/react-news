@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { ServiceMessage } from '..'
+import { ServiceMessage, PreloaderForText } from '..'
 
 const ListItemContent = ({ id, title, time, by, score, descendants }) => (
   <>
@@ -40,6 +40,10 @@ const ListItemContent = ({ id, title, time, by, score, descendants }) => (
 
 const ListItem = ({ isLoading, isError, item }) => (
   <li>
+    {isLoading && (
+      <PreloaderForText />
+    )}
+
     {isError && (
       <ServiceMessage title='Error' message={isError} />
     )}

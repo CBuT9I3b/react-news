@@ -24,3 +24,10 @@ export const PreloaderAndMessage = ({ message }) => (
     </div>
   </div>
 );
+
+export const PreloaderForText = () => (
+  <div>
+    <div className='preloader--title' />
+    <div className='preloader--text' />
+  </div>
+);
