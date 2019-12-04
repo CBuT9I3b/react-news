@@ -24,7 +24,7 @@ function stories(state = INITIAL_STATE_STORIES, action) {
     case GET_STORIES_MORE:
       return {
         ...state,
-        numberPerPage: state.numberPerPage + 10
+        numberPerPage: state.numberPerPage + 20
       };
     default:
       return state

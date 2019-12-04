@@ -2,7 +2,7 @@ export const INITIAL_STATE_STORIES = {
   isLoading: false,
   isError: false,
   stories: null,
-  numberPerPage: 10
+  numberPerPage: 20
 };
 
 export const INITIAL_STATE_ITEM = {

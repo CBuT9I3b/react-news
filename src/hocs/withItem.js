@@ -13,7 +13,16 @@ const withItem = Component => {
     componentDidMount() {
       let { dispatch, firebase, id } = this.props;
 
-      dispatch(getItemIfNeeded(firebase, id))
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            dispatch(getItemIfNeeded(firebase, id));
+            observer.disconnect()
+          }
+        }
+      );
+
+      observer.observe(this._ref)
     }
 
     componentDidUpdate(prevProps) {
@@ -25,7 +34,11 @@ const withItem = Component => {
     }
 
     render() {
-      return <Component {...this.props} />
+      return (
+        <div ref={ div => this._ref = div }>
+          <Component {...this.props} />
+        </div>
+      )
     }
   }
 
