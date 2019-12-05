@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { ListComments, PreloaderForText } from '..'
+import { ListComments, PreloaderAndMessage } from '..'
 
 const CommentContent = ({ by, time, text, kids, deleted }) => (
   <>
@@ -29,7 +29,7 @@ const CommentContent = ({ by, time, text, kids, deleted }) => (
 const Comment = ({ index, isLoading, item }) => (
   <li>
     {isLoading && index === 0 && (
-      <PreloaderForText />
+      <PreloaderAndMessage message='Comments are loading...' />
     )}
 
     {item && (

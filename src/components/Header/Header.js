@@ -27,7 +27,7 @@ const Header = () => (
     <div className='navbar-fixed'>
       <nav className='blue-grey darken-3'>
         <div className='nav-wrapper container'>
-          <a href='#!' className='right sidenav-trigger' data-target='mobile-nav'>
+          <a href='#!' className='sidenav-trigger' data-target='mobile-nav'>
             <i className='material-icons'>menu</i>
           </a>
           <NavLink to='/' className='brand-logo hide-on-med-and-down'>React HNews</NavLink>

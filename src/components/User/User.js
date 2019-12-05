@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { withUser } from '../../hocs'
-import { ServiceMessage, PreloaderAndMessage } from '..'
+import { ServiceMessage, PreloaderAndMessage, PreloaderForText } from '..'
 
 import { setTitle } from '../../utils'
 
@@ -37,7 +37,7 @@ const User = ({ isLoading, isError, user }) => (
     )}
 
     {!isLoading && !isError && !user && (
-      <ServiceMessage title='Error' message='Oops...' />
+      <PreloaderForText />
     )}
   </article>
 );

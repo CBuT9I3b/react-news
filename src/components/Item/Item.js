@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 import { withItem } from '../../hocs'
 
-import { ServiceMessage, PreloaderAndMessage, ListComments } from '..'
+import { ServiceMessage, PreloaderAndMessage, ListComments, PreloaderForText } from '..'
 
 import { setTitle } from '../../utils'
 
@@ -58,7 +58,7 @@ const Item = ({ isLoading, isError, item }) => (
     )}
 
     {!isLoading && !isError && !item && (
-      <ServiceMessage title='Error' message='Oops...' />
+      <PreloaderForText />
     )}
   </article>
 );

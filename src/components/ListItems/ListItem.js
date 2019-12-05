@@ -53,7 +53,7 @@ const ListItem = ({ isLoading, isError, item }) => (
     )}
 
     {!isLoading && !isError && !item && (
-      <ServiceMessage title='Error' message='Oops...' />
+      <PreloaderForText />
     )}
   </li>
 );
