@@ -43,8 +43,8 @@ const ItemContent = ({ title, by, time, text, url, score, kids, deleted, descend
   )
 };
 
-const Item = ({ isLoading, isError, item }) => (
-  <article>
+const Item = ({ isLoading, isError, item, refForIntersection }) => (
+  <article ref={refForIntersection}>
     {isLoading && (
       <PreloaderAndMessage message='Story is loading...' />
     )}

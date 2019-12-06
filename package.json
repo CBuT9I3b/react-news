@@ -46,7 +46,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "firebase": "^7.5.0",
+    "firebase": "^7.5.1",
     "material-design-icons-iconfont": "^5.0.1",
     "materialize-css": "^1.0.0",
     "prop-types": "^15.7.2",

@@ -26,16 +26,14 @@ const CommentContent = ({ by, time, text, kids, deleted }) => (
   </>
 );
 
-const Comment = ({ index, isLoading, item }) => (
-  <li>
+const Comment = ({ index, isLoading, item, refForIntersection }) => (
+  <li ref={refForIntersection} className={item && 'comment'}>
     {isLoading && index === 0 && (
       <PreloaderAndMessage message='Comments are loading...' />
     )}
 
     {item && (
-      <div className='comment'>
-        <CommentContent {...item} />
-      </div>
+      <CommentContent {...item} />
     )}
   </li>
 );

@@ -8,9 +8,9 @@ const App = () => (
       <Header />
     </header>
     <main>
-      <section className='my--timeline'>
+      <div className='my--timeline'>
         <Routes />
-      </section>
+      </div>
     </main>
   </>
 );

@@ -38,8 +38,8 @@ const ListItemContent = ({ id, title, time, by, score, descendants }) => (
   </>
 );
 
-const ListItem = ({ isLoading, isError, item }) => (
-  <li>
+const ListItem = ({ isLoading, isError, item, refForIntersection }) => (
+  <li ref={refForIntersection}>
     {isLoading && (
       <PreloaderForText />
     )}

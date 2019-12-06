@@ -34,11 +34,7 @@ const withItem = Component => {
     }
 
     render() {
-      return (
-        <div ref={ div => this._ref = div }>
-          <Component {...this.props} />
-        </div>
-      )
+      return <Component refForIntersection={ element => this._ref = element }  {...this.props} />
     }
   }
 
