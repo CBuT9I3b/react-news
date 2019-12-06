@@ -43,7 +43,7 @@ const Header = () => (
 
     <ul className='sidenav blue-grey darken-3' id='mobile-nav'>
       <li><a href='#!' className='sidenav-close white-text'>
-        <i className='material-icons white-text'>arrow_back</i>React HNews
+        <i className='material-icons white-text'>arrow_back</i>React HN
       </a></li>
       <li className='divider' />
       <BlockLinksNews />
