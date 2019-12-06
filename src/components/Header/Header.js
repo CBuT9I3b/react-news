@@ -30,7 +30,7 @@ const Header = () => (
           <a href='#!' className='sidenav-trigger' data-target='mobile-nav'>
             <i className='material-icons'>menu</i>
           </a>
-          <NavLink to='/' className='brand-logo hide-on-med-and-down'>React HNews</NavLink>
+          <NavLink to='/' className='brand-logo hide-on-med-and-down'>React HN</NavLink>
           <NavLink to='/' className='brand-logo center hide-on-large-only'>RHN</NavLink>
           <ul className='right hide-on-med-and-down'>
             <BlockLinksNews />

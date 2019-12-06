@@ -1,7 +1,6 @@
 {
-  "name": "react-news",
+  "name": "react-hn",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
@@ -9,7 +8,6 @@
     "serve": "firebase serve",
     "deploy": "firebase deploy"
   },
-  "keywords": [],
   "author": "Mike",
   "license": "MIT",
   "devDependencies": {

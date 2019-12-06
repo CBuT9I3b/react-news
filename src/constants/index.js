@@ -17,4 +17,4 @@ export const INITIAL_STATE_USER = {
   user: null
 };
 
-export const SITE_TITLE = 'React HNews';
+export const SITE_TITLE = 'React HN';
